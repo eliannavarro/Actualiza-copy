@@ -28,7 +28,7 @@
 
                 {{-- Campo Nombre --}}
                 <div class="mb-3">
-                    <label for="nombre" class="form-label">Nombre</label>
+                    <label for="nombre" class="form-label">Nombre del cliente</label>
                     <input type="text" class="form-control" id="nombres" name="nombres"
                         value="{{ $data->nombres ?? old('nombres') }}" placeholder="">
                     @error('nombres')
@@ -36,9 +36,9 @@
                     @enderror
                 </div>
 
-                {{-- Campo Cédula --}}
+                {{-- Campo Cuenta Contrato --}}
                 <div class="mb-3">
-                    <label for="cedula" class="form-label">Cédula</label>
+                    <label for="cuenta" class="form-label">Cuenta contrato</label>
                     <input type="text" class="form-control" id="cedula" name="cedula"
                         value="{{ $data->cedula ?? old('cedula') }}" placeholder="">
                     @error('cedula')

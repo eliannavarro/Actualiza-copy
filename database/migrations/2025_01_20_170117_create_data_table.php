@@ -15,10 +15,8 @@ return new class extends Migration {
             $table->string('orden')->unique()->nullable();
             $table->string('nombres')->nullable();
             $table->string('direccion')->nullable();
-            $table->string('barrio')->nullable();
-            $table->string('telefono')->nullable();
-            $table->string('correo')->nullable();
-
+            $table->string('causanl_obs')->nullable();
+            $table->string('obs_adic')->nullable();
 
             $table->string('medidor')->nullable();
             $table->integer('lectura')->nullable();
