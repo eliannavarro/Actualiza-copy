@@ -1,0 +1,160 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.container {
+    background: var(--sidebar-color);
+    overflow: hidden;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+    box-sizing: border-box;
+    max-width: 500px;
+    text-align: center;
+}
+/* ================== dark/light mode para vistas de usuario ================== */
+
+.dark-mode-switch {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    background-color: var(--primary-color-light);
+    padding: 8px 12px;
+    border-radius: 20px;
+    box-shadow: var(--box-shadow);
+    z-index: 1000;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--toggle-color);
+    -webkit-transition: .4s;
+    transition: .4s;
+
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--sidebar-color);
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: var(--primary-color);
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(16px);
+    -ms-transform: translateX(16px);
+    transform: translateX(16px);
+    background-color: var(--primary-color-light);
+}
+
+* {
+    border-radius: 34px;
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.mode-text {
+    font-size: 0.875rem;
+    margin-left: 8px;
+    color: var(--text-color);
+}
+
+h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.buttons a {
+    display: inline-block;
+    padding: 10px;
+    background-color: var(--primary-color);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.buttons a:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para mensajes de éxito */
+.alert {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+
+
+@media (max-width: 480px) {
+    .container {
+        width: 100%;
+        min-width: auto;
+    }
+
+
+    .btn {
+        font-size: 0.9rem;
+    }
+
+    .page-link {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+}

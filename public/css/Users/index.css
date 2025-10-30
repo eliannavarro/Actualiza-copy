@@ -1,0 +1,82 @@
+* {
+    font-size: 0.9rem;
+}
+
+/* Contenedor principal */
+.users-container {
+    padding: 2rem;
+    background-color: var(--sidebar-color);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: auto;
+}
+
+/* Encabezado */
+.users-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.users-header h2 {
+    color: var(--text-color);
+    font-size: var(--font-size-tittle);
+    font-weight: 600;
+}
+
+
+
+/* Tabla */
+.users-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.users-table th,
+.users-table td {
+    padding: 0.5rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid var(--primary-color-light);
+}
+
+.users-table th {
+    font-weight: 600;
+    color: var(--text-color);
+    background-color: var(--primary-color-light);
+}
+
+.users-table tr:hover {
+    background-color: var(--primary-color-light);
+}
+
+/* Botones */
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+
+
+
+
+/* Iconos */
+.icon-table {
+    font-size: 1.25rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .users-container {
+        padding: 1rem;
+        margin: 0.5rem;
+    }
+
+    .users-table {
+        display: block;
+        overflow-x: auto;
+    }
+}

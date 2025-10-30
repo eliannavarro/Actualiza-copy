@@ -1,0 +1,498 @@
+/* Google Font Import - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+}
+
+:root {
+    /* ===== Colors ===== */
+    --body-color: #F4F6F9; /* Color de fondo */
+    --sidebar-color: #FFFFFF; /* Color de la sidebar */
+    --primary-color: #ad0000; /* Azul vibrante */
+    --primary-color-light: #f3f3f3; /* Azul claro */
+    --secondary-color: #858585; /* Gris claro */
+    --secondary-color-light: #f1f1f1; /* Gris claro */
+    --tertiary-color: #4A4A4A; /* Gris claro */
+    --tertiary-color-light: #f9f9f9; /* Gris claro */
+    --text-color: #4A4A4A; /* Gris oscuro para texto */
+    --toggle-color: #555555; /* Gris para el botón de modo oscuro */
+    --text-color-dark: #B5B5B5; /* Gris suave para el texto en modo oscuro */
+    --hover-color: #ad0000; /* Azul claro para hover */
+
+    /* ===== Dark Mode Colors ===== */
+    --body-color-dark: #1F1F1F; /* Fondo oscuro */
+    --sidebar-color-dark: #2A2A2A; /* Sidebar oscura */
+    --text-color-dark-mode: #D1D1D1; /* Texto claro para modo oscuro */
+
+    /* ====== Transition ====== */
+    --tran-03: all 0.2s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.3s ease;
+
+    /* ====== Border Radius ====== */
+    --border-radius: 8px;
+    --border-radius-small: 6px;
+
+    /* ====== Box Shadow ====== */
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    /* ====== Font Size ====== */
+    --font-size-tittle: 1.75rem;
+
+
+}
+
+body{
+    min-height: 100vh;
+    background-color: var(--body-color);
+    color: var(--text-color);
+    transition: var(--tran-05);
+}
+
+::selection{
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+body.dark{
+    background-color: var(--body-color-dark);
+    color: var(--text-color-dark-mode);
+    --body-color: #18191a;
+    --sidebar-color: #242526;
+    --primary-color: #ad0000;
+    --primary-color-light: #3a3b3c;
+    --toggle-color: #fff;
+    --text-color: #ccc;
+}
+
+body.no-transition * {
+    transition: none !important;
+}
+
+/* ===== Sidebar ===== */
+ .sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    padding: 4px 14px;
+    background: var(--sidebar-color);
+    transition: var(--tran-05);
+    z-index: 100;
+}
+.sidebar.close{
+    width: 88px;
+}
+
+/* ===== Reusable code - Here ===== */
+.sidebar li{
+    height: 40px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.sidebar header .image,
+.sidebar .icon{
+    min-width: 60px;
+    border-radius: 6px;
+}
+
+.sidebar .icon{
+    min-width: 60px;
+    border-radius: 6px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.sidebar .text,
+.sidebar .icon{
+    color: var(--text-color);
+    transition: var(--tran-03);
+}
+
+.sidebar .text{
+    font-size: 17px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 1;
+}
+.sidebar.close .text{
+    opacity: 0;
+}
+/* =========================== */
+
+.sidebar header{
+    position: relative;
+}
+
+.sidebar header .image-text{
+    display: flex;
+    align-items: center;
+}
+.sidebar header .logo-text{
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================== */
+header .image-text .name {
+    margin-top: 2px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+/* header .image-text .profession{
+    font-size: 16px;
+    margin-top: -2px;
+    display: block;
+} */
+
+.sidebar header .image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar header .image img{
+    width: 40px;
+    border-radius: 6px;
+}
+
+.sidebar header .toggle{
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    transform: translateY(-50%) rotate(180deg);
+    height: 25px;
+    width: 25px;
+    background-color: var(--primary-color);
+    color: var(--sidebar-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    cursor: pointer;
+    transition: var(--tran-05);
+}
+
+body.dark .sidebar header .toggle{
+    color: var(--text-color);
+}
+
+.sidebar.close .toggle{
+    transform: translateY(-50%) rotate(0deg);
+}
+
+.sidebar .menu{
+    margin-top: 0;
+}
+
+.sidebar li.search-box{
+    border-radius: 6px;
+    background-color: var(--primary-color-light);
+    cursor: pointer;
+    transition: var(--tran-05);
+}
+
+.sidebar li.search-box input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: var(--primary-color-light);
+    color: var(--text-color);
+    border-radius: 6px;
+    font-size: 17px;
+    font-weight: 500;
+    transition: var(--tran-05);
+}
+
+.sidebar li a{
+    list-style: none;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: var(--tran-03);
+}
+
+.sidebar li a:hover{
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+body.dark .sidebar li a:hover {
+    background-color: var(--hover-color);
+}
+
+.sidebar li a:hover .icon,
+.sidebar li a:hover .text{
+    color: var(--sidebar-color);
+}
+body.dark .sidebar li a:hover .icon,
+body.dark .sidebar li a:hover .text{
+    color: var(--text-color);
+}
+
+.sidebar .menu-bar{
+    height: calc(100% - 55px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+}
+.menu-bar::-webkit-scrollbar{
+    display: none;
+}
+.sidebar .menu-bar .mode{
+    border-radius: 6px;
+    background-color: var(--primary-color-light);
+    position: relative;
+    transition: var(--tran-05);
+}
+
+.menu-bar .mode .sun-moon{
+    height: 50px;
+    width: 60px;
+}
+
+.mode .sun-moon i{
+    position: absolute;
+}
+.mode .sun-moon i.sun{
+    opacity: 0;
+}
+body.dark .mode .sun-moon i.sun{
+    opacity: 1;
+}
+body.dark .mode .sun-moon i.moon{
+    opacity: 0;
+}
+
+.menu-bar .bottom-content .toggle-switch{
+    position: absolute;
+    right: 0;
+    height: 100%;
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.toggle-switch .switch{
+    position: relative;
+    height: 22px;
+    width: 40px;
+    border-radius: 25px;
+    background-color: var(--toggle-color);
+    transition: var(--tran-05);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.switch::before{
+    content: '';
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    background-color: var(--sidebar-color);
+    transition: var(--tran-04);
+    transition: all 0.3s ease;
+}
+body.dark .switch {
+    background-color: var(--primary-color);
+}
+
+body.dark .switch::before{
+    left: 20px;
+    background-color: var(--primary-color-light);
+}
+
+.home{
+    position: absolute;
+    top: 0;
+    top: 0;
+    left: 250px;
+    height: 100vh;
+    width: calc(100% - 250px);
+    background-color: var(--body-color);
+    transition: var(--tran-05);
+}
+.home .text{
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-color);
+    padding: 12px 60px;
+}
+
+.sidebar.close ~ .home{
+    left: 78px;
+    height: 100vh;
+    width: calc(100% - 78px);
+}
+body.dark .home .text{
+    color: var(--text-color);
+}
+
+/* ===== Contenido ===== */
+
+.content {
+    position: absolute;
+    padding: 10px;
+    top: 0;
+    left: 250px; /* Desplazada hacia la derecha según el ancho de la sidebar */
+    width: calc(100% - 250px); /* El contenido ocupa el espacio restante */
+    /* height: 100vh; Se asegura de ocupar toda la altura de la ventana */
+    background-color: var(--body-color);
+    transition: var(--tran-05); /* Transición suave para los cambios */
+}
+
+.sidebar.close ~ .content {
+    left: 88px; /* Ajusta el desplazamiento cuando la sidebar está replegada */
+    width: calc(100% - 88px); /* Ajusta el ancho del contenido */
+}
+
+/* ===== Buttons ===== */
+
+/* Button Group Styles */
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0.8rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    transition: var(--transition);
+    text-decoration: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    opacity: 0.8;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    opacity: 0.8;
+}
+
+.btn-tertiary {
+    background-color: var(--tertiary-color);
+    color: white;
+}
+
+.btn-tertiary:hover {
+    opacity: 0.8;
+}
+
+
+
+
+/* ===== Alerts ===== */
+.alert {
+    padding: 6px;
+    margin-bottom: 1.5rem;
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+
+/* Alert Colors */
+.alert-success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    color: #664d03;
+    border: 1px solid #ffeeba;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+
+
+
+
+
+
+/* ===== Fonts ===== */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+a, button, input, p {
+    font-family: 'Poppins', sans-serif;
+    font-size:  1rem;
+}
+
+i {
+    margin-right: 5px;
+}
+
+
+h2 {
+    color: var(--text-color);
+    font-size: var(--font-size-tittle);
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+
+
+
+
+

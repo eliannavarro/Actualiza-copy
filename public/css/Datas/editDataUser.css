@@ -1,0 +1,335 @@
+body {
+    min-height: 100vh;
+    background-color: var(--body-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.container {
+    background: var(--sidebar-color);
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    padding: 10px;
+    box-shadow: var(--box-shadow);
+    box-sizing: border-box;
+    width: 70%;
+}
+
+
+
+/* ===== estilos del formulario ===== */
+
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 0.9rem;
+    border: 1px solid var(--primary-color-light);
+    border-radius: var(--border-radius-small);
+    background-color: var(--sidebar-color);
+    color: var(--text-color);
+}
+
+.form-control:disabled {
+    background-color: var(--sidebar-color);
+    color: var(--secondary-color);
+    cursor: not-allowed;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    margin: 20px 0;
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin-right: 10px;
+    margin-top: 3px;
+}
+
+.terminos {
+    font-size: 0.6rem;
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+/* ===== estilos de firma ===== */
+.firma-container{
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+.firma-container label{
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.firma{
+    border: 1px solid #666;
+    background-color: #f9f9f9;
+}
+
+.firma-container {
+    margin-bottom: 20px;
+}
+
+.firma {
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+
+.firma-actions {
+    margin-bottom: 20px;
+}
+
+.btn-clear {
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-clear:hover {
+    background-color: #f0f0f0;
+    border-color: #ad0000;
+    color: #ad0000;
+}
+
+/* Estilos para los botones de opción */
+.firma-tecnico-options .option-buttons {
+    display: flex;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.firma-tecnico-options .option-btn {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    font-weight: 500;
+}
+
+.firma-tecnico-options .option-btn.active {
+    background-color: #ad0000;
+    color: white;
+    border-color: #ad0000;
+}
+
+.firma-tecnico-options .option-btn:hover:not(.active) {
+    background-color: #f0f0f0;
+    border-color: #ad0000;
+    color: #ad0000;
+}
+
+.firma-option-container {
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+/* Estilos para la carga de archivos */
+.file-upload-wrapper {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.file-upload-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.file-upload-label {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #f8f8f8;
+    border: 2px dashed #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.file-upload-label:hover {
+    border-color: #ad0000;
+    color: #ad0000;
+}
+
+.upload-icon {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+/* Estilos para la previsualización */
+.preview-container {
+    margin: auto;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    background-color: #fff;
+    text-align: center;
+    max-width: 550px;
+    max-height: 190px;
+    overflow: hidden;
+}
+
+.preview-container img {
+    max-width: 100%;
+    max-height: 150px;
+    object-fit: contain;
+}
+
+/* Estilos para los botones principales */
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-primary {
+    background-color: #ad0000;
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #8a0000;
+}
+
+.btn-tertiary {
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    color: #333;
+}
+
+.btn-tertiary:hover {
+    background-color: #f0f0f0;
+    border-color: #ad0000;
+    color: #ad0000;
+}
+
+
+.select2-container .select2-selection--single {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 0.9rem;
+    border: 1px solid var(--primary-color-light);
+    border-radius: var(--border-radius-small);
+    background-color: var(--sidebar-color);
+    color: var(--text-color);
+    height: auto;
+}
+
+/* Ajustar el texto renderizado */
+.select2-container .select2-selection--single .select2-selection__rendered {
+    padding-left: 0;
+    padding-right: 20px;
+    color: var(--text-color);
+    line-height: normal;
+}
+
+/* Ajustar posición de la flecha del dropdown */
+.select2-container .select2-selection--single .select2-selection__arrow {
+    height: 100%;
+    top: 0;
+}
+
+/* Estilo del dropdown */
+.select2-dropdown {
+    border: 1px solid var(--primary-color-light);
+    border-radius: var(--border-radius-small);
+    background-color: var(--sidebar-color);
+}
+
+/* Estilo de las opciones */
+.select2-container--default .select2-results__option {
+    padding: 8px 12px;
+    color: var(--text-color);
+}
+
+/* Estilo hover en las opciones */
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: var(--primary-color-light);
+    color: var(--text-color);
+}
+
+/* Estilo del input de búsqueda */
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 1px solid var(--primary-color-light);
+    background-color: var(--sidebar-color);
+    color: var(--text-color);
+    padding: 8px 10px;
+    border-radius: var(--border-radius-small);
+}
+
+
+/* Estilos para los labels */
+label {
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Estilos adicionales para el formulario */
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    margin: 20px 0;
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin-top: 3px;
+    margin-right: 10px;
+}
+
+.terminos {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* ===== estilos  ===== */
+
+
+@media (max-width: 480px) {
+    .container {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .header-container .header-title {
+        font-size: 1.2rem;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+    }
+}

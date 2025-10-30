@@ -1,0 +1,377 @@
+/*------------------------------------
+  Basic Layout and Section Styles
+------------------------------------*/
+.container {
+    position: relative;
+}
+
+.section {
+    padding: 1rem 2rem;
+    background-color: var(--sidebar-color);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    max-width: 600px;
+}
+
+/*------------------------------------
+  Form Header
+------------------------------------*/
+.form-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.8rem;
+}
+
+.form-header h2 {
+    color: var(--text-color);
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/*------------------------------------
+  Form Groups and Controls
+------------------------------------*/
+.form-group {
+    margin-bottom: 0.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.1rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--primary-color-light);
+    border-radius: 6px;
+    background-color: var(--body-color);
+    color: var(--text-color);
+    transition: var(--tran-03);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(173, 0, 0, 0.1);
+}
+
+.form-control::placeholder {
+    color: #999;
+}
+
+/*------------------------------------
+  Input Group with Prefix
+------------------------------------*/
+.input-group {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+}
+
+.input-prefix {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    background-color: var(--primary-color-light);
+    border: 1px solid var(--primary-color-light);
+    border-right: none;
+    border-radius: 6px 0 0 6px;
+    color: var(--text-color);
+}
+
+.input-group .form-control {
+    border-radius: 0 6px 6px 0;
+    flex: 1;
+}
+
+/*------------------------------------
+  Form Actions and Buttons
+------------------------------------*/
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: var(--tran-03);
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+}
+
+.btn-secondary {
+    background-color: var(--primary-color-light);
+    color: var(--text-color);
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: var(--tran-03);
+}
+
+.btn-secondary:hover {
+    opacity: 0.9;
+}
+
+/*------------------------------------
+  Validation States
+------------------------------------*/
+.form-control.is-invalid {
+    border-color: #dc3545;
+}
+
+.error-message {
+    display: none;
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/*------------------------------------
+  Modal Styles
+------------------------------------*/
+.modal {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    overflow: auto;
+    padding: 20px;
+}
+
+.modal-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+}
+
+.modal-content {
+    background-color: var(--sidebar-color);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: modalFadeIn 0.3s ease;
+    position: relative;
+    margin: auto;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--primary-color-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-title {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.close-modal {
+    color: var(--text-color);
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: var(--tran-03);
+}
+
+.close-modal:hover {
+    opacity: 1;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-footer {
+    padding: 15px 20px;
+    border-top: 1px solid var(--primary-color-light);
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/*------------------------------------
+  Select2 Component Overrides
+------------------------------------*/
+.select2-container .select2-selection--single {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 0.9rem;
+    border: 1px solid var(--primary-color-light);
+    border-radius: var(--border-radius-small);
+    background-color: var(--sidebar-color);
+    color: var(--text-color);
+    height: auto;
+}
+
+/* Ajustar el texto renderizado */
+.select2-container .select2-selection--single .select2-selection__rendered {
+    padding-left: 0;
+    padding-right: 20px;
+    color: var(--text-color);
+    line-height: normal;
+}
+
+/* Ajustar posición de la flecha del dropdown */
+.select2-container .select2-selection--single .select2-selection__arrow {
+    height: 100%;
+    top: 0;
+}
+
+/* Estilo del dropdown */
+.select2-dropdown {
+    border: 1px solid var(--primary-color-light);
+    border-radius: var(--border-radius-small);
+    background-color: var(--sidebar-color);
+}
+
+/* Estilo de las opciones */
+.select2-container--default .select2-results__option {
+    padding: 8px 12px;
+    color: var(--text-color);
+}
+
+/* Estilo hover en las opciones */
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: var(--primary-color-light);
+    color: var(--text-color);
+}
+
+/* Estilo del input de búsqueda */
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 1px solid var(--primary-color-light);
+    background-color: var(--sidebar-color);
+    color: var(--text-color);
+    padding: 8px 10px;
+    border-radius: var(--border-radius-small);
+}
+
+/*-----------------------------
+  Estilos para líneas de servicio en el modal
+------------------------------*/
+.items-container {
+    margin-top: 1rem;
+}
+
+.service-card {
+    border: 1px solid var(--primary-color-light);
+    border-radius: 8px;
+    background-color: var(--body-color);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.service-card .remove-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+    color: #c0392b;
+    transition: transform 0.2s;
+}
+
+.service-card .remove-btn:hover {
+    transform: scale(1.2);
+}
+
+.service-card .field-row {
+    margin-bottom: 0.75rem;
+}
+
+.service-card .field-row label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.service-card .field-row input[type="number"],
+.service-card .field-row input[readonly],
+.service-card .field-row select {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--primary-color-light);
+    border-radius: 6px;
+    background-color: var(--body-color);
+    color: var(--text-color);
+}
+
+/* Estilo para botón agregar servicio */
+#btnAddItem {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    transition: opacity 0.2s;
+}
+
+#btnAddItem:hover {
+    opacity: 0.8;
+}
+
+
+/*------------------------------------
+  Responsive Adjustments
+------------------------------------*/
+@media (max-width: 768px) {
+    .user-form-container {
+        padding: 1rem;
+        margin: 0.5rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+    }
+}

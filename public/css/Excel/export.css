@@ -1,0 +1,54 @@
+
+body {
+    min-height: 100vh;
+    background-color: var(--body-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+
+.container{
+    background-color: var(--sidebar-color);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    transition: var(--tran-03);
+    padding: 1rem;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Opcional: para separar los elementos */
+    gap: 1rem; /* Espaciado entre los elementos */
+    width: 100%; /* Asegura que ocupe todo el contenedor */
+}
+
+.form-group select {
+    flex: 1; /* Permite que el select se ajuste para ocupar el espacio restante */
+    box-sizing: border-box; /* Asegura que padding y borde no afecten el tamaño */
+    padding: 0.5rem 1rem;
+}
+
+.form-group button {
+    flex-shrink: 0; /* Evita que el botón se reduzca */
+    white-space: nowrap; /* Evita que el texto del botón se divida en varias líneas */
+}
+
+
+
+table {
+    border-radius: 8px;
+}
+td{
+    max-width: 270px;
+    word-wrap: break-word;
+    white-space: normal;
+}
+.btn-primary {
+    width: 100%;
+}
+

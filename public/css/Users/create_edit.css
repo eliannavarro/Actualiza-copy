@@ -1,0 +1,84 @@
+/* Contenedor del formulario */
+.user-form-container {
+    padding: 1rem 2rem;
+    background-color: var(--sidebar-color);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    max-width: 600px;
+}
+
+.form-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.8rem;
+}
+
+.form-header h2 {
+    color: var(--text-color);
+    font-size: 1.75rem;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 0.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.1rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--primary-color-light);
+    border-radius: 6px;
+    background-color: var(--body-color);
+    color: var(--text-color);
+    transition: var(--tran-03);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(173, 0, 0, 0.1);
+}
+
+.form-control::placeholder {
+    color: #999;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Validación */
+.error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .user-form-container {
+        padding: 1rem;
+        margin: 0.5rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
