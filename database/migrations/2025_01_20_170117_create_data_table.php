@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('orden')->unique()->nullable();
             $table->string('nombres')->nullable();
+            $table->string('cuentaContrato')->nullable();
             $table->string('direccion')->nullable();
             $table->string('causanl_obs')->nullable();
             $table->string('obs_adic')->nullable();

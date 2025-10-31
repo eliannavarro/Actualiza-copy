@@ -80,7 +80,7 @@ class DataController extends Controller
         $direction = $request->get('direction', 'asc');
 
         // Validar que la columna y la dirección sean válidas
-        $validColumns = ['nombres', 'direccion', 'barrio', 'telefono', 'correo', 'orden'];
+        $validColumns = ['nombres', 'cuentaContrato', 'direccion', 'causanl_obs', 'obs_adic'];
         if (!in_array($sortBy, $validColumns)) {
             $sortBy = 'id';
         }
@@ -116,7 +116,7 @@ class DataController extends Controller
         $direction = $request->get('direction', 'asc'); // Dirección de orden por defecto
 
         // Validar la columna y la dirección de ordenamiento
-        $validColumns = ['nombres', 'direccion', 'barrio', 'telefono', 'correo', 'orden'];
+        $validColumns = ['nombres', 'cuentaContrato', 'direccion', 'causanl_obs', 'obs_adic'];
         if (!in_array($sortBy, $validColumns)) {
             $sortBy = 'id';
         }
@@ -138,23 +138,17 @@ class DataController extends Controller
             $query->where('direccion', 'like', '%' . $request->input('buscador-direccion') . '%');
         }
 
-        if ($request->filled('buscador-barrio')) {
-            $query->where('barrio', 'like', '%' . $request->input('buscador-barrio') . '%');
+        if ($request->filled('buscador-cuentaContrato')) {
+            $query->where('barrio', 'like', '%' . $request->input('buscador-cuentaContrato') . '%');
         }
 
-        if ($request->filled('buscador-telefono')) {
-            $query->where('telefono', 'like', '%' . $request->input('buscador-telefono') . '%');
+        if ($request->filled('buscador-causanl_obs')) {
+            $query->where('telefono', 'like', '%' . $request->input('buscador-causanl_obs') . '%');
         }
 
-        if ($request->filled('buscador-correo')) {
-            $query->where('correo', 'like', '%' . $request->input('buscador-correo') . '%');
+        if ($request->filled('buscador-obs_adic')) {
+            $query->where('correo', 'like', '%' . $request->input('buscador-obs_adic') . '%');
         }
-
-        if ($request->filled('buscador-orden')) {
-            $query->where('orden', 'like', '%' . $request->input('buscador-orden') . '%');
-        }
-
-
 
         // Aplicar el ordenamiento
         $data = $query
@@ -191,7 +185,7 @@ class DataController extends Controller
         $direction = $request->get('direction', 'asc'); // Dirección por defecto
 
         // Validar que la columna y la dirección sean válidas
-        $validColumns = ['operario', 'nombres', 'direccion', 'barrio', 'telefono', 'correo', 'orden'];
+        $validColumns = ['operario', 'nombres', 'cuentaContrato','direccion', 'causanl_obs', 'obs_adic'];
         if (!in_array($sortBy, $validColumns)) {
             $sortBy = 'id';
         }
@@ -227,7 +221,7 @@ class DataController extends Controller
         $direction = $request->get('direction', 'asc'); // Dirección de orden por defecto
 
         // Validar la columna y la dirección de ordenamiento
-        $validColumns = ['operario', 'nombres', 'direccion', 'barrio', 'telefono', 'correo', 'orden'];
+        $validColumns = ['operario', 'nombres', 'cuentaContrato', 'causanl_obs', 'obs_adic'];
         if (!in_array($sortBy, $validColumns)) {
             $sortBy = 'id';
         }
@@ -253,22 +247,17 @@ class DataController extends Controller
             $query->where('direccion', 'like', '%' . $request->input('buscador-direccion') . '%');
         }
 
-        if ($request->filled('buscador-barrio')) {
-            $query->where('barrio', 'like', '%' . $request->input('buscador-barrio') . '%');
+        if ($request->filled('buscador-cuentaContrato')) {
+            $query->where('cuentaContrato', 'like', '%' . $request->input('buscador-cuentaContrato') . '%');
         }
 
-        if ($request->filled('buscador-telefono')) {
-            $query->where('telefono', 'like', '%' . $request->input('buscador-telefono') . '%');
+        if ($request->filled('buscador-causanl_obs')) {
+            $query->where('causanl_obs', 'like', '%' . $request->input('buscador-causanl_obs') . '%');
         }
 
-        if ($request->filled('buscador-correo')) {
-            $query->where('correo', 'like', '%' . $request->input('buscador-correo') . '%');
+        if ($request->filled('buscador-obs_adic')) {
+            $query->where('obs_adic', 'like', '%' . $request->input('buscador-obs_adic') . '%');
         }
-
-        if ($request->filled('buscador-orden')) {
-            $query->where('orden', 'like', '%' . $request->input('buscador-orden') . '%');
-        }
-
 
         // Aplicar el ordenamiento
         $data = $query
@@ -453,495 +442,30 @@ class DataController extends Controller
     // Mostrar formulario vacío para crear nuevo registro
     public function create()
     {
-        $ciclos = [
-            "BRN - ELE",
-            "BRN - CLD",
-            "BRN - CNG",
-            "BRN - ESP",
-            "BQ - R03",
-            "BQ - R07",
-            "BQ - R21",
-            "BQ - R60",
-            "BQ - R10",
-            "BQ - R33",
-            "BQ - R59",
-            "BQ - R04",
-            "BQ - R11",
-            "BQ - RFS",
-            "BQ - R61",
-            "BQ - R26",
-            "BQ - R36",
-            "BQ - R09",
-            "BQ - R38",
-            "BQ - R08",
-            "BQ - R41",
-            "BQ - R45",
-            "BQ - R35",
-            "BQ - R13",
-            "BQ - R23",
-            "BQ - R34",
-            "BQ - R01",
-            "BQ - R44",
-            "BQ - R32",
-            "BQ - R55",
-            "BQ - R39",
-            "BQ - R22",
-            "BQ - R37",
-            "BQ - R14",
-            "BQ - R43",
-            "BQ - R05",
-            "BQ - R42",
-            "BQ - R19",
-            "BQ - R54",
-            "BQ - R40",
-            "BQ - R02",
-            "BQ - R12",
-            "BQ - R06",
-            "BQ - R15",
-            "BQ - R20",
-            "BQ - R18",
-            "BQ - R24",
-            "BQ - R27",
-            "BQ - R16",
-            "BQ - R30",
-            "BQ - R25",
-            "BQ - R17",
-            "BQ - R29",
-            "BQ - R28",
-            "BQ - R51",
-            "BQ - R31",
-            "BQ - R52",
-            "BQ - R53",
-            "BQ - R56",
-            "BQ - R57",
-            "GLP - PLT",
-            "GLP - ABO",
-            "GLP - ABA",
-            "GLP - MDF",
-            "JDA - R1N",
-            "JDA - SJS",
-            "JDA - R4T ",
-            "JDA - R5R",
-            "JDA - R2V",
-            "MLB - RM1",
-            "MLB - RM2",
-            "PMR - RA1",
-            "PMR - RA2",
-            "PMR - RA3",
-            "PIJ - RP1",
-            "PIJ - RP2",
-            "PIJ - RP3",
-            "POL - RL1",
-            "POL - RL2",
-            "PNR - RD1",
-            "PNR - RD2",
-            "PNR - RD3",
-            "PTO - RPB",
-            "PTO - RVC",
-            "PTO - RBB",
-            "PTO - RMM",
-            "PTO - RSS",
-            "PTO - RMC",
-            "SGD - RS2",
-            "SGD - RS1",
-            "SGD - RS3",
-            "SLG - RL3",
-            "SLG - RL1",
-            "SLG - RL2",
-            "SLG - RL4",
-            "SLG - RL5",
-            "STO - RO2",
-            "STO - RO1",
-            "STO - RO3",
-            "SLD - R41",
-            "SLD - R20",
-            "SLD - R24",
-            "SLD - R43",
-            "SLD - R04",
-            "SLD - R21",
-            "SLD - R22",
-            "SLD - R18",
-            "SLD - R23",
-            "SLD - R05",
-            "SLD - R30B",
-            "SLD - R26",
-            "SLD - R09",
-            "SLD - R08",
-            "SLD - R27",
-            "SLD - R31",
-            "SLD - R02",
-            "SLD - R29",
-            "SLD - R03",
-            "SLD - R13A",
-            "SLD - R28",
-            "SLD - R28B",
-            "SLD - R30A",
-            "SLD - R15A",
-            "SLD - R12",
-            "SLD - R28A",
-            "SLD - R13",
-            "SLD - R25",
-            "SLD - R15B",
-            "SLD - R15",
-            "SLD - R34",
-            "SLD - R42",
-            "SLD - R30C",
-            "TBR - R3",
-            "TBR - R2",
-            "TBR - R4",
-            "TBR - R1",
-            "TBR - R5",
-            "USR - R1",
-        ];
-
-        $servicios = Servicio::all();
-
-        return view('Data.Agendar.agendar', compact('ciclos', 'servicios'));
+        return view('Data.Agendar.agendar');
     }
 
     // Guardar nuevo registro
     public function store(Request $request)
     {
-
-        $ciclos = [
-            "BRN - ELE",
-            "BRN - CLD",
-            "BRN - CNG",
-            "BRN - ESP",
-            "BQ - R03",
-            "BQ - R07",
-            "BQ - R21",
-            "BQ - R60",
-            "BQ - R10",
-            "BQ - R33",
-            "BQ - R59",
-            "BQ - R04",
-            "BQ - R11",
-            "BQ - RFS",
-            "BQ - R61",
-            "BQ - R26",
-            "BQ - R36",
-            "BQ - R09",
-            "BQ - R38",
-            "BQ - R08",
-            "BQ - R41",
-            "BQ - R45",
-            "BQ - R35",
-            "BQ - R13",
-            "BQ - R23",
-            "BQ - R34",
-            "BQ - R01",
-            "BQ - R44",
-            "BQ - R32",
-            "BQ - R55",
-            "BQ - R39",
-            "BQ - R22",
-            "BQ - R37",
-            "BQ - R14",
-            "BQ - R43",
-            "BQ - R05",
-            "BQ - R42",
-            "BQ - R19",
-            "BQ - R54",
-            "BQ - R40",
-            "BQ - R02",
-            "BQ - R12",
-            "BQ - R06",
-            "BQ - R15",
-            "BQ - R20",
-            "BQ - R18",
-            "BQ - R24",
-            "BQ - R27",
-            "BQ - R16",
-            "BQ - R30",
-            "BQ - R25",
-            "BQ - R17",
-            "BQ - R29",
-            "BQ - R28",
-            "BQ - R51",
-            "BQ - R31",
-            "BQ - R52",
-            "BQ - R53",
-            "BQ - R56",
-            "BQ - R57",
-            "GLP - PLT",
-            "GLP - ABO",
-            "GLP - ABA",
-            "GLP - MDF",
-            "JDA - R1N",
-            "JDA - SJS",
-            "JDA - R4T ",
-            "JDA - R5R",
-            "JDA - R2V",
-            "MLB - RM1",
-            "MLB - RM2",
-            "PMR - RA1",
-            "PMR - RA2",
-            "PMR - RA3",
-            "PIJ - RP1",
-            "PIJ - RP2",
-            "PIJ - RP3",
-            "POL - RL1",
-            "POL - RL2",
-            "PNR - RD1",
-            "PNR - RD2",
-            "PNR - RD3",
-            "PTO - RPB",
-            "PTO - RVC",
-            "PTO - RBB",
-            "PTO - RMM",
-            "PTO - RSS",
-            "PTO - RMC",
-            "SGD - RS2",
-            "SGD - RS1",
-            "SGD - RS3",
-            "SLG - RL3",
-            "SLG - RL1",
-            "SLG - RL2",
-            "SLG - RL4",
-            "SLG - RL5",
-            "STO - RO2",
-            "STO - RO1",
-            "STO - RO3",
-            "SLD - R41",
-            "SLD - R20",
-            "SLD - R24",
-            "SLD - R43",
-            "SLD - R04",
-            "SLD - R21",
-            "SLD - R22",
-            "SLD - R18",
-            "SLD - R23",
-            "SLD - R05",
-            "SLD - R30B",
-            "SLD - R26",
-            "SLD - R09",
-            "SLD - R08",
-            "SLD - R27",
-            "SLD - R31",
-            "SLD - R02",
-            "SLD - R29",
-            "SLD - R03",
-            "SLD - R13A",
-            "SLD - R28",
-            "SLD - R28B",
-            "SLD - R30A",
-            "SLD - R15A",
-            "SLD - R12",
-            "SLD - R28A",
-            "SLD - R13",
-            "SLD - R25",
-            "SLD - R15B",
-            "SLD - R15",
-            "SLD - R34",
-            "SLD - R42",
-            "SLD - R30C",
-            "TBR - R3",
-            "TBR - R2",
-            "TBR - R4",
-            "TBR - R1",
-            "TBR - R5",
-            "USR - R1",
-        ];
-
         $validatedData = $request->validate([
             'nombres' => 'required|string|max:255|regex:/^[\pL0-9\s\-]+$/u',
-            'cedula' => 'required|numeric|digits_between:6,10',
+            'cuentaContrato' => 'required|string|max:255|regex:/^[^#]+$/',
             'direccion' => 'required|string|max:255|regex:/^[^#]+$/',
-            'barrio' => 'required|string|max:100',
-            'telefono' => 'required|digits:10',
-            'correo' => 'email|max:255',
-            'cotizacion_items' => 'required|json',
-            // 'servicio_id' => 'required|exists:servicios,id',
-            // 'descuento' => 'required|numeric|min:0|max:100',
-            'total' => 'required|numeric|regex:/^\d{1,9}(\.\d{1,2})?$/',
-            'ciclo' => ['required', 'string', 'max:255', Rule::in($ciclos)],
+            'causanl_obs' => 'required|string|max:250',
+            'obs_adic' => 'required|string|max:255',
         ], [
             'nombres.required' => 'El nombre es obligatorio.',
             'nombres.regex' => 'El nombre solo puede contener letras mayusculas, minusculas, espacios, guiones y numeros.',
-            'cedula.required' => 'La cédula es obligatoria.',
-            'cedula.numeric' => 'La cédula solo puede contener números.',
-            'cedula.digits_between' => 'La cédula debe tener entre 6 y 10 dígitos.',
+            'cuentaContrato.required' => 'La cuenta contrato es obligatoria.',
             'direccion.required' => 'La dirección es obligatoria.',
             'direccion.regex' => 'Solo ingrese caracteres alfanuméricos.',
-            'barrio.required' => 'El barrio es obligatorio.',
-            'telefono.required' => 'El teléfono es obligatorio.',
-            'telefono.digits' => 'El teléfono debe contener exactamente 10 dígitos.',
-            'correo.email' => 'Debe ingresar un correo válido.',
-            'ciclo' => 'Debe ingresar un ciclo válido.',
-            'servicio_id' => 'Seleccione un servicio válido',
-            'total.required' => 'El total es obligatorio.',
-            'total.numeric' => 'El total debe ser un número válido.',
-            'total.regex' => 'El total debe tener como máximo 9 dígitos enteros y 2 decimales.',
+            'causanl_obs.required' => 'El causanl_obs es obligatorio.',
+            'obs_adic.required' => 'El obs_adic es obligatorio.',
         ]);
+        // Crear registro
+        $data = Data::create($validatedData);
 
-
-        // Mapa ciclo → municipio
-        $cicloMunicipios = [
-            "BRN - ELE" => "BARANOA",
-            "BRN - CLD" => "BARANOA",
-            "BRN - CNG" => "BARANOA",
-            "BRN - ESP" => "BARANOA",
-            "BQ - R03" => "BARRANQUILLA",
-            "BQ - R07" => "BARRANQUILLA",
-            "BQ - R21" => "BARRANQUILLA",
-            "BQ - R60" => "BARRANQUILLA",
-            "BQ - R10" => "BARRANQUILLA",
-            "BQ - R33" => "BARRANQUILLA",
-            "BQ - R59" => "BARRANQUILLA",
-            "BQ - R04" => "BARRANQUILLA",
-            "BQ - R11" => "BARRANQUILLA",
-            "BQ - RFS" => "BARRANQUILLA",
-            "BQ - R61" => "BARRANQUILLA",
-            "BQ - R26" => "BARRANQUILLA",
-            "BQ - R36" => "BARRANQUILLA",
-            "BQ - R09" => "BARRANQUILLA",
-            "BQ - R38" => "BARRANQUILLA",
-            "BQ - R08" => "BARRANQUILLA",
-            "BQ - R41" => "BARRANQUILLA",
-            "BQ - R45" => "BARRANQUILLA",
-            "BQ - R35" => "BARRANQUILLA",
-            "BQ - R13" => "BARRANQUILLA",
-            "BQ - R23" => "BARRANQUILLA",
-            "BQ - R34" => "BARRANQUILLA",
-            "BQ - R01" => "BARRANQUILLA",
-            "BQ - R44" => "BARRANQUILLA",
-            "BQ - R32" => "BARRANQUILLA",
-            "BQ - R55" => "BARRANQUILLA",
-            "BQ - R39" => "BARRANQUILLA",
-            "BQ - R22" => "BARRANQUILLA",
-            "BQ - R37" => "BARRANQUILLA",
-            "BQ - R14" => "BARRANQUILLA",
-            "BQ - R43" => "BARRANQUILLA",
-            "BQ - R05" => "BARRANQUILLA",
-            "BQ - R42" => "BARRANQUILLA",
-            "BQ - R19" => "BARRANQUILLA",
-            "BQ - R54" => "BARRANQUILLA",
-            "BQ - R40" => "BARRANQUILLA",
-            "BQ - R02" => "BARRANQUILLA",
-            "BQ - R12" => "BARRANQUILLA",
-            "BQ - R06" => "BARRANQUILLA",
-            "BQ - R15" => "BARRANQUILLA",
-            "BQ - R20" => "BARRANQUILLA",
-            "BQ - R18" => "BARRANQUILLA",
-            "BQ - R24" => "BARRANQUILLA",
-            "BQ - R27" => "BARRANQUILLA",
-            "BQ - R16" => "BARRANQUILLA",
-            "BQ - R30" => "BARRANQUILLA",
-            "BQ - R25" => "BARRANQUILLA",
-            "BQ - R17" => "BARRANQUILLA",
-            "BQ - R29" => "BARRANQUILLA",
-            "BQ - R28" => "BARRANQUILLA",
-            "BQ - R51" => "BARRANQUILLA",
-            "BQ - R31" => "BARRANQUILLA",
-            "BQ - R52" => "BARRANQUILLA",
-            "BQ - R53" => "BARRANQUILLA",
-            "BQ - R56" => "BARRANQUILLA",
-            "BQ - R57" => "BARRANQUILLA",
-            "GLP - PLT" => "GALAPA",
-            "GLP - ABO" => "GALAPA",
-            "GLP - ABA" => "GALAPA",
-            "GLP - MDF" => "GALAPA",
-            "JDA - R1N" => "JUAN DE ACOSTA",
-            "JDA - SJS" => "JUAN DE ACOSTA",
-            "JDA - R4T " => "JUAN DE ACOSTA",
-            "JDA - R5R" => "JUAN DE ACOSTA",
-            "JDA - R2V" => "JUAN DE ACOSTA",
-            "MLB - RM1" => "MALAMBO",
-            "MLB - RM2" => "MALAMBO",
-            "PMR - RA1" => "PALMAR DE VARELA",
-            "PMR - RA2" => "PALMAR DE VARELA",
-            "PMR - RA3" => "PALMAR DE VARELA",
-            "PIJ - RP1" => "PIOJÓ",
-            "PIJ - RP2" => "PIOJÓ",
-            "PIJ - RP3" => "PIOJÓ",
-            "POL - RL1" => "POLONUEVO",
-            "POL - RL2" => "POLONUEVO",
-            "PNR - RD1" => "PONEDERA",
-            "PNR - RD2" => "PONEDERA",
-            "PNR - RD3" => "PONEDERA",
-            "PTO - RPB" => "PUERTO COLOMBIA",
-            "PTO - RVC" => "PUERTO COLOMBIA",
-            "PTO - RBB" => "PUERTO COLOMBIA",
-            "PTO - RMM" => "PUERTO COLOMBIA",
-            "PTO - RSS" => "PUERTO COLOMBIA",
-            "PTO - RMC" => "PUERTO COLOMBIA",
-            "SGD - RS2" => "SABANAGRANDE",
-            "SGD - RS1" => "SABANAGRANDE",
-            "SGD - RS3" => "SABANAGRANDE",
-            "SLG - RL3" => "SABANALARGA",
-            "SLG - RL1" => "SABANALARGA",
-            "SLG - RL2" => "SABANALARGA",
-            "SLG - RL4" => "SABANALARGA",
-            "SLG - RL5" => "SABANALARGA",
-            "STO - RO2" => "SANTO TOMÁS",
-            "STO - RO1" => "SANTO TOMÁS",
-            "STO - RO3" => "SANTO TOMÁS",
-            "SLD - R41" => "SOLEDAD",
-            "SLD - R20" => "SOLEDAD",
-            "SLD - R24" => "SOLEDAD",
-            "SLD - R43" => "SOLEDAD",
-            "SLD - R04" => "SOLEDAD",
-            "SLD - R21" => "SOLEDAD",
-            "SLD - R22" => "SOLEDAD",
-            "SLD - R18" => "SOLEDAD",
-            "SLD - R23" => "SOLEDAD",
-            "SLD - R05" => "SOLEDAD",
-            "SLD - R30B" => "SOLEDAD",
-            "SLD - R26" => "SOLEDAD",
-            "SLD - R09" => "SOLEDAD",
-            "SLD - R08" => "SOLEDAD",
-            "SLD - R27" => "SOLEDAD",
-            "SLD - R31" => "SOLEDAD",
-            "SLD - R02" => "SOLEDAD",
-            "SLD - R29" => "SOLEDAD",
-            "SLD - R03" => "SOLEDAD",
-            "SLD - R13A" => "SOLEDAD",
-            "SLD - R28" => "SOLEDAD",
-            "SLD - R28B" => "SOLEDAD",
-            "SLD - R30A" => "SOLEDAD",
-            "SLD - R15A" => "SOLEDAD",
-            "SLD - R12" => "SOLEDAD",
-            "SLD - R28A" => "SOLEDAD",
-            "SLD - R13" => "SOLEDAD",
-            "SLD - R25" => "SOLEDAD",
-            "SLD - R15B" => "SOLEDAD",
-            "SLD - R15" => "SOLEDAD",
-            "SLD - R34" => "SOLEDAD",
-            "SLD - R42" => "SOLEDAD",
-            "SLD - R30C" => "SOLEDAD",
-            "TBR - R3" => "TUBARÁ",
-            "TBR - R2" => "TUBARÁ",
-            "TBR - R4" => "TUBARÁ",
-            "TBR - R1" => "TUBARÁ",
-            "TBR - R5" => "TUBARÁ",
-            "USR - R1" => "USIACURÍ"
-        ];
-        $cotizacion_items = json_decode($validatedData['cotizacion_items']);
-
-        try {
-            // Crear registro
-            $data = Data::create($validatedData);
-
-            // Obtener ciclo directamente desde el validatedData
-            $ciclo = $validatedData['ciclo'];
-
-            // Asignar municipio según el ciclo
-            $data->municipio = $cicloMunicipios[$ciclo] ?? null;
-            $data->save();
-
-            foreach ($cotizacion_items as $item) {
-                DetalleVisita::create([
-                    'id_servicio' => $item->servicio_id,
-                    'id_data' => $data->id,
-                    'descuento' => $item->descuento,
-                    'subtotal' => $item->subtotal,
-                ]);
-            }
-
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', 'El registro ha fallado.');
-        }
         return redirect()->route('schedule.create')->with('success', 'Registro creado exitosamente.');
     }
 
@@ -1640,10 +1164,10 @@ class DataController extends Controller
                 'datas' => $datas,
                 'ciclos' => $ciclos,
                 'pagination' => [
-                    'total' => $datas->total(),
-                    'current_page' => $datas->currentPage(),
-                    'last_page' => $datas->lastPage(),
-                ]
+                        'total' => $datas->total(),
+                        'current_page' => $datas->currentPage(),
+                        'last_page' => $datas->lastPage(),
+                    ]
             ]);
         }
 

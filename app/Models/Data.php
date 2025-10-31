@@ -11,14 +11,10 @@ class Data extends Model
     protected $fillable = [
         'orden',
         'nombres',
-        'cedula',
+        'cuentaContrato',
         'direccion',
-        'barrio',
-        'telefono',
-        'correo',
-        'ciclo',
-
-        'total',
+        'causanl_obs',
+        'obs_adic',
         
         'medidor',
         'lectura',
