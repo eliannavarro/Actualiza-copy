@@ -50,21 +50,21 @@
             </div>
             
             <div class="form-group">
-                <label for="barrio">Barrio:</label>
-                <input type="text" id="barrio" name="barrio" class="form-control"
-                value="{{$data->barrio}}" disabled>
+                <label for="barrio">Cuenta contrato:</label>
+                <input type="text" id="cuentaContrato" name="cuentaContrato" class="form-control"
+                value="{{$data->cuentaContrato}}" disabled>
             </div>
           
             <div class="form-group">
-                <label for="telefono">Teléfono:</label>
-                <input type="text" id="telefono" name="telefono" class="form-control"
-                  value="{{$data->telefono}}" disabled>
+                <label for="telefono">Causanl_obs:</label>
+                <input type="text" id="causanl_obs" name="causanl_obs" class="form-control"
+                  value="{{$data->causanl_obs}}" disabled>
             </div>
            
             <div class="form-group">
-                <label for="correo">Correo:</label>
-                <input type="text" id="correo" name="correo" class="form-control"
-                value="{{$data->correo}}"  disabled>
+                <label for="correo">Obs_adic:</label>
+                <input type="text" id="correo" name="obs_adic" class="form-control"
+                value="{{$data->obs_adic}}"  disabled>
             </div>
 
 

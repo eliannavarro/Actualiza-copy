@@ -52,23 +52,23 @@
                             </td>
                         </tr>
                         <tr>
+                            <td class="table-cell-truncate" colspan="5"><strong>Cuenta contrato:</strong>
+                                {{ $item->cuentaContrato }}
+                            </td>
+                        </tr>
+                        <tr>
                             <td class="table-cell-truncate" colspan="5"><strong>Dirección:</strong>
                                 {{ $item->direccion }}
                             </td>
                         </tr>
                         <tr>
-                            <td class="table-cell-truncate" colspan="5"><strong>Barrio:</strong>
-                                {{ $item->barrio }}
+                            <td class="table-cell-truncate" colspan="5"><strong>Causanl_obs:</strong>
+                                {{ $item->causanl_obs }}
                             </td>
                         </tr>
                         <tr>
-                            <td class="table-cell-truncate" colspan="5"><strong>Teléfono:</strong>
-                                {{ $item->telefono }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="table-cell-truncate" colspan="5"><strong>Correo:</strong>
-                                {{ $item->correo }}
+                            <td class="table-cell-truncate" colspan="5"><strong>Obs_adic:</strong>
+                                {{ $item->obs_adic }}
                             </td>
                         </tr>
                         

@@ -65,24 +65,6 @@ class UserController extends Controller
         $user->password = Hash::make($request['password']);
         $user->rol = $request['rol'];
 
-        // Si el rol es técnico, guardar su firma en carpeta personalizada
-        if ($request->rol == 'user' && $request->hasFile('firma')) {
-
-            $nombreTecnico = Str::slug($request->name, '_'); // ejemplo: juan_perez
-            $mesActual = date('F');
-
-            // Crear ruta personalizada para el técnico
-            $firmaFile = $request->file('firma');
-            $firmaFileName = uniqid() . '.' . $firmaFile->getClientOriginalExtension();
-
-            $firmaPath = "Apptualiza/{$mesActual}/{$nombreTecnico}/firma del tecnico/{$firmaFileName}";
-
-            // Guardar el archivo en storage/app/public/...
-            Storage::disk('public')->put($firmaPath, file_get_contents($firmaFile));
-
-            // Guardar la ruta relativa en la BD
-            $user->firma_path = $firmaPath;
-        }
 
         $user->save();
 
@@ -103,37 +85,6 @@ class UserController extends Controller
             'password' => 'nullable|string|min:6',
             'rol' => 'required|string',
         ]);
-
-        // Si el rol es usuario, la firma es obligatoria si no tiene una y validar si se sube una nueva
-        if ($request->rol == 'user') {
-            if (!$user->firma_path && !$request->hasFile('firma')) {
-                $request->validate([
-                    'firma' => 'required|file|image|max:5048',
-                ]);
-            } elseif ($request->hasFile('firma')) {
-                $request->validate([
-                    'firma' => 'file|image|max:5048',
-                ]);
-            }
-        }
-        // Manejar la firma si es usuario
-        if ($request->rol == 'user' && $request->hasFile('firma')) {
-            // Eliminar la firma anterior si existe
-            if ($user->firma_path && Storage::disk('public')->exists($user->firma_path)) {
-                Storage::disk('public')->delete($user->firma_path);
-            }
-
-            // Guardar la nueva firma
-            $firmaPath = $request->file('firma')->store('firmas', 'public');
-            $user->firma_path = $firmaPath;
-        }
-        // Si el rol cambia de usuario a admin, eliminar la firma
-        elseif ($request->rol == 'admin' && $user->firma_path) {
-            if (Storage::disk('public')->exists($user->firma_path)) {
-                Storage::disk('public')->delete($user->firma_path);
-            }
-            $user->firma_path = null;
-        }
 
         $user->name = $request['name'];
 

@@ -144,13 +144,13 @@
                         <th>
                             @php
                                 $queryParams = request()->query();
-                                $queryParams['sortBy'] = 'barrio';
+                                $queryParams['sortBy'] = 'cuentaContrato';
                                 $queryParams['direction'] =
-                                    request('sortBy') == 'barrio' && request('direction') == 'asc' ? 'desc' : 'asc';
+                                    request('sortBy') == 'cuentaContrato' && request('direction') == 'asc' ? 'desc' : 'asc';
                             @endphp
                             <a href="{{ route(Route::currentRouteName(), $queryParams) }}">
-                                Barrio
-                                @if (request('sortBy') == 'barrio')
+                                Cuenta contrato
+                                @if (request('sortBy') == 'cuentaContrato')
                                     <i
                                         class="bx {{ request('direction') == 'asc' ? 'bx-up-arrow-alt' : 'bx-down-arrow-alt' }}"></i>
                                 @endif
