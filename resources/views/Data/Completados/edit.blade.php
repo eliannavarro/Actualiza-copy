@@ -9,10 +9,10 @@
 
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/css/select2.min.css" rel="stylesheet" />
-    
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/Datas/editDataUser.css') }}" rel="stylesheet">
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/js/select2.min.js"></script>
 </head>
@@ -21,32 +21,32 @@
     <div class="container">
         <h2> Actualizar datos</h2>
 
-        <form id="signature-form" action="{{route('completados.update', $data->id)}}" method="POST"
+        <form id="signature-form" action="{{ route('completados.update', $data->id) }}" method="POST"
             enctype="multipart/form-data">
             @csrf
             @method('PUT')
             {{-- CAMPOS DE LA AGENDA --}}
             <div class="mb-3">
-                <label for="orden" class="form-label">orden</label>
+                <label for="orden" class="form-label">Orden</label>
                 <input type="text" class="form-control" id="orden" name="orden"
-                    value="{{ old('orden') ?? $data->orden}}" disabled>
+                    value="{{ old('orden') ?? $data->orden }}" disabled>
             </div>
 
             <div class="mb-3">
-                <label for="nombres" class="form-label">Nombre</label>
+                <label for="nombres" class="form-label">Nombres</label>
                 <input type="text" class="form-control" id="nombres" name="nombres"
-                    value="{{ old('nombres') ?? $data->nombres}}" placeholder="nombre">
+                    value="{{ old('nombres') ?? $data->nombres }}" placeholder="nombres">
                 @error('nombres')
                     <div class="alert alert-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
 
-            {{-- Campo Cédula --}}
+            {{-- Campo Cuenta contrato --}}
             <div class="mb-3">
-                <label for="cedula" class="form-label">Cédula</label>
-                <input type="text" class="form-control" id="cedula" name="cedula"
-                    value="{{  old('cedula') ??  $data->cedula }}" placeholder="Cédula">
-                @error('cedula')
+                <label for="cuentaContrato" class="form-label">Cuenta contrato</label>
+                <input type="text" class="form-control" id="cuentaContrato" name="cuentaContrato"
+                    value="{{ old('cuentaContrato') ?? $data->cuentaContrato }}" placeholder="cuentaContrato">
+                @error('cuentaContrato')
                     <div class="alert alert-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
@@ -55,38 +55,8 @@
             <div class="mb-3">
                 <label for="direccion" class="form-label">Dirección</label>
                 <input type="text" class="form-control" id="direccion" name="direccion"
-                    value="{{ old('direccion') ?? $data->direccion  }}" placeholder="Dirección">
+                    value="{{ old('direccion') ?? $data->direccion }}" placeholder="dirección">
                 @error('direccion')
-                    <div class="alert alert-danger mt-1">{{ $message }}</div>
-                @enderror
-            </div>
-
-            {{-- Campo Barrio --}}
-            <div class="mb-3">
-                <label for="barrio" class="form-label">Barrio</label>
-                <input type="text" class="form-control" id="barrio" name="barrio"
-                    value="{{ old('barrio') ?? $data->barrio }}" placeholder="Barrio">
-                @error('barrio')
-                    <div class="alert alert-danger mt-1">{{ $message }}</div>
-                @enderror
-            </div>
-
-            {{-- Campo Teléfono --}}
-            <div class="mb-3">
-                <label for="telefono" class="form-label">Teléfono</label>
-                <input type="tel" class="form-control" id="telefono" name="telefono"
-                    value="{{ old('telefono') ?? $data->telefono  }}" placeholder="Teléfono">
-                @error('telefono')
-                    <div class="alert alert-danger mt-1">{{ $message }}</div>
-                @enderror
-            </div>
-
-            {{-- Campo Correo --}}
-            <div class="mb-3">
-                <label for="correo" class="form-label">Correo</label>
-                <input type="text" class="form-control" id="correo" name="correo"
-                    value="{{ old('correo') ?? $data->correo  }}" placeholder="Correo">
-                @error('correo')
                     <div class="alert alert-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
@@ -95,8 +65,8 @@
             <div class="mb-3">
                 <label for="ciclo" class="form-label">Ciclo</label>
                 <select name="ciclo" id="ciclo" class="form-control">
-                    @foreach ($ciclos as $item)
-                        <option value="{{ $item }}" {{ old('ciclo', $data->ciclo) == $item ? 'selected' : '' }} placeholder="Ciclo">
+                   @foreach ($ciclo as $item)
+                        <option value="{{ $item }}" {{ old('ciclo', $data->ciclo) == $item ? 'selected' : '' }} placeholder="ciclo">
                             {{ $item }}
                         </option>
                     @endforeach
@@ -105,93 +75,84 @@
                     <div class="alert alert-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
-            
+
+            {{-- Campo Nombre auditor --}}
+            <div class="mb-3">
+                <label for="nombre_auditor" class="form-label">Nombre auditor</label>
+                <input type="tel" class="form-control" id="nombre_auditor" name="nombre_auditor"
+                    value="{{ old('nombre_auditor') ?? $data->nombre_auditor }}" placeholder="nombre_auditor">
+                @error('nombre_auditor')
+                    <div class="alert alert-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+
+            {{-- Campo Causanl_obs --}}
+            <div class="mb-3">
+                <label for="causanl_obs" class="form-label">Causanl_obs</label>
+                <input type="text" class="form-control" id="causanl_obs" name="causanl_obs"
+                    value="{{ old('causanl_obs') ?? $data->causanl_obs }}" placeholder="causanl_obs">
+                @error('causanl_obs')
+                    <div class="alert alert-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+
+            {{-- Campo Obs_adic --}}
+            <div class="mb-3">
+                <label for="obs_adic" class="form-label">Obs_adic</label>
+                <input type="text" class="form-control" id="obs_adic" name="obs_adic"
+                    value="{{ old('obs_adic') ?? $data->obs_adic }}" placeholder="obs_adic">
+                @error('Obs_adic')
+                    <div class="alert alert-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+
             {{-- CAMPOS DE LA VISITA --}}
             <div class="form-group">
-                <label for="numeroPersonas">Número de personas:</label>
-                <input type="text" name="numeroPersonas" id="numeroPersonas" class="form-control"
-                    value="{{ old('numeroPersonas', $data->numeroPersonas) }}" maxlength="10" placeholder="Número de personas">
-                @error('numeroPersonas')
+                <label for="lector">Lector:</label>
+                <input type="text" name="lector" id="lector" class="form-control"
+                    value="{{ old('lector', $data->lector) }}" maxlength="10" placeholder="lector">
+                @error('lector')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
-            
+
             <div class="form-group">
-                <label for="categoria">Categoría:</label>
-                <select name="categoria" id="categoria" class="form-control">
-                    <option value="">Seleccione la categoría de la inspección</option>
-                    <option value="residencial" {{ old('categoria', $data->categoria) == 'residencial' ? 'selected' : '' }}>Residencial</option>
-                    <option value="comercial" {{ old('categoria', $data->categoria) == 'comercial' ? 'selected' : '' }}>Comercial</option>
-                    <option value="industrial" {{ old('categoria', $data->categoria) == 'industrial' ? 'selected' : '' }}>Industrial</option>
-                </select>
-                @error('categoria')
+                <label for="auditor">Auditor:</label>
+                <input type="text" name="auditor" id="auditor" class="form-control"
+                    value="{{ old('auditor', $data->auditor) }}" placeholder="auditor">
+                @error('auditor')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
-            
+
             <div class="form-group">
-                <label for="puntoHidraulico">Punto hidráulico:</label>
-                <input type="text" name="puntoHidraulico" id="puntoHidraulico" class="form-control"
-                    value="{{ old('puntoHidraulico', $data->puntoHidraulico) }}" placeholder="Puntos hihdráulicos">
-                @error('puntoHidraulico')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            
-            <div class="form-group">
-                <label for="medidor">Medidor:</label>
-                <input type="text" name="medidor" id="medidor" class="form-control"
-                    value="{{ old('medidor', $data->medidor) }}" placeholder="Medidor">
-                @error('medidor')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            
-            <div class="form-group">
-                <label for="lectura">Lectura:</label>
-                <input type="text" name="lectura" id="lectura" class="form-control"
-                    value="{{ old('lectura', $data->lectura) }}" maxlength="10" placeholder="Lectura">
-                @error('lectura')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            
-            <div class="form-group">
-                <label for="aforo">Aforo:</label>
-                <input type="text" name="aforo" id="aforo" class="form-control"
-                    value="{{ old('aforo', $data->aforo) }}" placeholder="Aforo">
-                @error('aforo')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            
-            <div class="form-group">
-                <label for="observacion_inspeccion">Observación:</label>
-                <input type="text" name="observacion_inspeccion" id="observacion_inspeccion" class="form-control"
-                    value="{{ old('observacion_inspeccion', $data->observacion_inspeccion) }}" placeholder="Observación">
-                @error('observacion_inspeccion')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            
-            <div class="form-group">
-                <label for="resultado">Resultado:</label>
-                <select name="resultado" id="resultado" class="form-control">
-                    @foreach ($resultados as $item)
-                        <option value="{{ $item }}" {{ old('resultado', $data->resultado) == $item ? 'selected' : '' }} placeholder="Resultado">
+                <label for="atendio_usuario">Atendio usuario:</label>
+                <select name="atendio_usuario" id="atendio_usuario" class="form-control">
+                    @foreach ($atendio_usuario as $item)
+                        <option value="{{ $item }}" {{ old('atendio_usuario', $data->atendio_usuario) == $item ? 'selected' : '' }} placeholder="atendio_usuario">
                             {{ $item }}
                         </option>
                     @endforeach
                 </select>
-                @error('resultado')
+                @error('atendio_usuario')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="observacion_inspeccion">Observación:</label>
+                <input type="text" name="observacion_inspeccion" id="observacion_inspeccion" class="form-control"
+                    value="{{ old('observacion_inspeccion', $data->observacion_inspeccion) }}"
+                    placeholder="Observación">
+                @error('observacion_inspeccion')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
 
             <!-- Contenedor para centrar el botón de actualización -->
             <div class="btn-group">
-                <button onclick="window.location.href='javascript:history.back()'"
-                    type="button" class="btn btn-tertiary">
+                <button onclick="window.location.href='javascript:history.back()'" type="button"
+                    class="btn btn-tertiary">
                     volver
                 </button>
 
@@ -210,39 +171,6 @@
         if (localStorage.getItem('darkMode') === 'true') {
             document.body.classList.add('dark');
         }
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#ciclo').select2({
-                placeholder: "Selecciona o escribe un ciclo",
-                allowClear: true,
-                width: '100%',
-                // Matcher personalizado para búsqueda sin distinguir mayúsculas
-                matcher: function(params, data) {
-                    // Si no hay término de búsqueda, devolver todos los elementos
-                    if ($.trim(params.term) === '') {
-                        return data;
-                    }
-                    
-                    // Si no hay texto, no mostrar
-                    if (typeof data.text === 'undefined') {
-                        return null;
-                    }
-                    
-                    // Convertir a minúsculas para comparación
-                    var termLower = params.term.toLowerCase();
-                    var textLower = data.text.toLowerCase();
-                    
-                    // Verificar si contiene el término
-                    if (textLower.indexOf(termLower) > -1) {
-                        return data;
-                    }
-                    
-                    return null;
-                }
-            });
-        });
     </script>
 </body>
 

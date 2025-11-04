@@ -15,28 +15,22 @@ return new class extends Migration {
             $table->string('orden')->unique()->nullable();
             $table->string('nombres')->nullable();
             $table->string('cuentaContrato')->nullable();
+            $table->string('nombre_auditor')->nullable();
             $table->string('direccion')->nullable();
             $table->string('causanl_obs')->nullable();
+            $table->string('ciclo')->nullable();
             $table->string('obs_adic')->nullable();
 
-            $table->string('medidor')->nullable();
-            $table->integer('lectura')->nullable();
-            $table->integer('aforo')->nullable();
-            $table->string('resultado')->nullable();
+            $table->string('lector')->nullable();
+            $table->string('atendio_usuario')->nullable();
+            $table->string('auditor')->nullable();
             $table->string('observacion_inspeccion')->nullable();
             $table->string('url_foto')->nullable();
-            $table->text('firmaUsuario')->nullable();
-            $table->text('firmaTecnico')->nullable();
-            $table->string('ciclo')->nullable();
             $table->foreignId('id_user')
                 ->nullable()
                 ->constrained('users')
                 ->nullOnDelete();
-            $table->integer('puntoHidraulico')->nullable();
-            $table->integer('numeroPersonas')->nullable();
-            $table->string('categoria')->nullable();
             $table->string('estado')->nullable();
-
             $table->timestamps();
         });
     }

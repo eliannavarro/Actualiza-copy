@@ -26,7 +26,7 @@
         </div>
     
         <div class="form-group">
-            <label for="email">Correo Electrónico</label>
+            <label for="email">Correo Electrnico</label>
             <input type="email" class="form-control @error('email') is-invalid @enderror"
                 id="email" name="email" value="{{ old('email', $user->email) }}" required>
             @error('email')
@@ -63,24 +63,7 @@
         </div>
     
         <div class="form-group" id="firma-container" style="{{ old('rol', $user->rol) == 'user' ? '' : 'display: none;' }}">
-            <label for="firma">Firma</label>
-            
-            @if ($user->firma_path)
-                <div class="current-signature mb-2">
-                    <p>Firma actual:</p>
-                    <img src="{{ Storage::url($user->firma_path) }}" alt="Firma actual" style="max-width: 200px; max-height: 100px;">
-                </div>
-            @endif
-            
-            <input type="file" class="form-control @error('firma') is-invalid @enderror" 
-                id="firma" name="firma" accept="image/*">
-            <small class="form-text text-muted">Subir una nueva firma reemplazará la actual</small>
-            
-            @error('firma')
-                <div class="error-message">{{ $message }}</div>
-            @enderror
-        </div>
-    
+   
         <div class="form-actions">
             <button type="button" class="btn btn-secondary" onclick="window.location.href='{{ route('users.index') }}'">
                 Cancelar
@@ -91,19 +74,4 @@
         </div>
     </form>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const rolSelect = document.getElementById('rol');
-        const firmaContainer = document.getElementById('firma-container');
-        
-        rolSelect.addEventListener('change', function() {
-            if (this.value === 'user') {
-                firmaContainer.style.display = 'block';
-            } else {
-                firmaContainer.style.display = 'none';
-            }
-        });
-    });
-    </script>
 @endsection

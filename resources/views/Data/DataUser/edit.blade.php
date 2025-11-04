@@ -28,8 +28,19 @@
             <div class="form-group">
                 <label for="orden">Orden:</label>
                 <input type="text" name="orden" id="orden" class="form-control"
-                value="{{ old('nombre_cliente', $data->orden) }}" disabled>
+                    value="{{ old('nombre_cliente', $data->orden) }}" disabled>
             </div>
+            <div class="form-group">
+                <label for="correo">Nombre auditor:</label>
+                <input type="text" id="nombre_auditor" name="nombre_auditor" class="form-control"
+                    value="{{ $data->nombre_auditor }}" disabled>
+            </div>
+
+            <div class="form-group">
+                <label for="ciclo">Ciclo:</label>
+                <input type="text" name="ciclo" class="form-control" value="{{ $data->ciclo }}" disabled>
+            </div>
+
 
             <div class="form-group">
                 <label for="nombre_cliente">Nombre Cliente:</label>
@@ -37,140 +48,81 @@
                     value="{{ old('nombre_cliente', $data->nombres) }}" disabled>
             </div>
 
-            {{-- <div class="form-group">
-                <label for="ciclo">Ciclo:</label>
-                <input type="text" name="ciclo" class="form-control"
-                    disabled>
-            </div> --}}
 
             <div class="form-group">
                 <label for="direccion">Dirección:</label>
                 <input type="text" id="direccion" name="direccion" class="form-control"
-                  value="{{$data->direccion}}"  disabled>
+                    value="{{ $data->direccion }}" disabled>
             </div>
-            
+
             <div class="form-group">
                 <label for="barrio">Cuenta contrato:</label>
                 <input type="text" id="cuentaContrato" name="cuentaContrato" class="form-control"
-                value="{{$data->cuentaContrato}}" disabled>
+                    value="{{ $data->cuentaContrato }}" disabled>
             </div>
-          
+
             <div class="form-group">
                 <label for="telefono">Causanl_obs:</label>
                 <input type="text" id="causanl_obs" name="causanl_obs" class="form-control"
-                  value="{{$data->causanl_obs}}" disabled>
+                    value="{{ $data->causanl_obs }}" disabled>
             </div>
-           
+
             <div class="form-group">
                 <label for="correo">Obs_adic:</label>
-                <input type="text" id="correo" name="obs_adic" class="form-control"
-                value="{{$data->obs_adic}}"  disabled>
+                <input type="text" id="correo" name="obs_adic" class="form-control" value="{{ $data->obs_adic }}"
+                    disabled>
             </div>
 
 
             {{-- CAMPOS DE LA VISITA --}}
+
             <div class="form-group">
-                <label for="numeroPersonas">Número de personas:</label>
-                <input type="text" name="numeroPersonas" id="numeroPersonas" class="form-control"
-                    value="{{ old('numeroPersonas') }}" maxlength="10">
-                @error('numeroPersonas')
+                <label for="lectura">Lectura</label>
+                <label for="lectura">Lector:</label>
+                <input type="text" name="lector" id="lector" class="form-control" value="{{ old('lector') }}"
+                    maxlength="10">
+                @error('lector')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="form-group">
-                <label for="categoria">Categoría:</label>
-                    <select name="categoria" id="categoria" class="form-control">
-                        <option value="">Seleccione la categoria de la inspección</option>
-                            <option value="residencial" {{ old('categoria') == 'residencial' ? 'selected' : '' }}>Residencial</option>
-                            <option value="comercial" {{ old('categoria') == 'comercial' ? 'selected' : '' }}>Comercial</option>
-                            <option value="industrial" {{ old('categoria') == 'industrial' ? 'selected' : '' }}>Industrial</option>
-                    </select>                
-                @error('categoria')
+                <label for="aforo">Auditor:</label>
+                <input type="text" name="auditor" id="auditor" class="form-control" value="{{ old('auditor') }}">
+                @error('auditor')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="form-group">
-                <label for="puntoHidraulico">Punto hidráulico:</label>
-                <input type="text" name="puntoHidraulico" id="puntoHidraulico" class="form-control"
-                    value="{{ old('puntoHidraulico') }}" >
-                @error('puntoHidraulico')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            
-            <div class="form-group">
-                <label for="medidor">Medidor:</label>
-                <input type="text" name="medidor" id="medidor" class="form-control"
-                    value="{{ old('medidor') }}" >
-                @error('medidor')
+                <label for="categoria">Atendio usuario:</label>
+                <select name="atendio_usuario" id="atendio_usuario" class="form-control">
+                    <option value="">Seleccione</option>
+                    <option value="si" {{ old('si') == 'si' ? 'selected' : '' }}>si</option>
+                    <option value="no" {{ old('no') == 'no' ? 'selected' : '' }}>no</option>
+
+                </select>
+                @error('atendio_usuario')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
 
-
-            <div class="form-group">
-                <label for="lectura">Lectura:</label>
-                <input type="text" name="lectura" id="lectura" class="form-control"
-                    value="{{ old('lectura') }}" maxlength="10">
-                @error('lectura')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label for="aforo">Aforo:</label>
-                <input type="text" name="aforo" id="aforo" class="form-control"
-                    value="{{ old('aforo') }}">
-                @error('aforo')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
             <div class="form-group">
                 <label for="observacion_inspeccion">Observación:</label>
                 <input type="text" name="observacion_inspeccion" id="observacion_inspeccion" class="form-control"
                     value="{{ old('observacion_inspeccion') }}">
-                
+
                 @error('observacion_inspeccion')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="form-group">
-                <label for="resultado">Resultado:</label>
-                <select name="resultado" id="resultado" class="form-control">
-                    <option value="">Seleccione el resultado de la inspección</option>
-                    @foreach ($resultados as $item)
-                        <option value="{{ $item }}" {{ old('resultado') == $item ? 'selected' : '' }}>{{ $item }}</option>
-                    @endforeach
-                </select>
-                
-                @error('resultado')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="form-group">
-                <label for="foto">Evidencia:</label>
+                <label for="foto">Alfanumerica:</label>
                 <input type="file" name="foto" id="foto" class="form-control">
                 @error('foto')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
-            </div>
-
-
-            {{-- FIRMA DEL USUARIO --}}
-            <div class="form-group firma-container">
-                <label>Firma del usuario</label>
-                <canvas id="signature-pad-usuario" class="firma" width="550" height="170"></canvas>
-                <input type="hidden" id="firmaUsuario" name="firmaUsuario" class="form-control">
-                @error('firmaUsuario')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="firma-actions">
-                <button type="button" id="clear-usuario" class="btn-clear">Limpiar firma del usuario</button>
             </div>
 
             <!-- Reemplaza el botón con un checkbox y un texto -->
@@ -190,8 +142,8 @@
 
             <!-- Contenedor para centrar el botón de actualización -->
             <div class="btn-group">
-                <button onclick="window.location.href='javascript:history.back()'"
-                    type="button" class="btn btn-tertiary">
+                <button onclick="window.location.href='javascript:history.back()'" type="button"
+                    class="btn btn-tertiary">
                     volver
                 </button>
 
@@ -213,36 +165,6 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Inicializar firma del usuario
-            const canvasUsuario = document.getElementById('signature-pad-usuario');
-            const clearButtonUsuario = document.getElementById('clear-usuario');
-            const inputUsuario = document.getElementById('firmaUsuario');
-            const signaturePadUsuario = new SignaturePad(canvasUsuario, {
-                minWidth: 1,
-                maxWidth: 3,
-                penColor: "black",
-            });
-
-            clearButtonUsuario.addEventListener('click', function () {
-                signaturePadUsuario.clear();
-            });
-
-            // Manejar envío del formulario
-            const form = document.querySelector('form');
-            form.addEventListener('submit', function (event) {
-                // Validar firma del usuario
-                if (signaturePadUsuario.isEmpty()) {
-                    alert('Por favor, asegúrate de firmar en el campo de usuario antes de enviar.');
-                    event.preventDefault();
-                    return;
-                } else {
-                    inputUsuario.value = signaturePadUsuario.toDataURL();
-                }
-            });
-        });
-    </script>
 </body>
 
 </html>

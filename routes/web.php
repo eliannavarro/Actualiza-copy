@@ -67,8 +67,7 @@ Route::middleware(['auth', CheckRole::class . ':admin'])->group(function () {
     Route::get('/export-data-complete', [DataController::class, 'exportDataComplete'])->name('export.excel.complete');
 
     Route::get('/database/download', [DataController::class, 'download'])->name('database.download');
-
-
+    
     //RUTAS PARA SERVICIOS
     Route::resource('servicio', ServicioController::class);
 });

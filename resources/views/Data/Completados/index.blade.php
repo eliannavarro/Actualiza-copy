@@ -76,6 +76,7 @@
                                 @endif
                             </a>
                         </th>
+
                         <th>
                             @php
                                 $queryParams = request()->query();
@@ -92,7 +93,6 @@
                             </a>
                         </th>
 
-
                         <th>
                             @php
                                 $queryParams = request()->query();
@@ -101,7 +101,7 @@
                                     request('sortBy') == 'nombres' && request('direction') == 'asc' ? 'desc' : 'asc';
                             @endphp
                             <a href="{{ route(Route::currentRouteName(), $queryParams) }}">
-                                Nombres
+                                Cliente
                                 @if (request('sortBy') == 'nombres')
                                     <i
                                         class="bx {{ request('direction') == 'asc' ? 'bx-up-arrow-alt' : 'bx-down-arrow-alt' }}"></i>
@@ -112,13 +112,31 @@
                         <th>
                             @php
                                 $queryParams = request()->query();
-                                $queryParams['sortBy'] = 'telefono';
+                                $queryParams['sortBy'] = 'ciclo';
                                 $queryParams['direction'] =
-                                    request('sortBy') == 'telefono' && request('direction') == 'asc' ? 'desc' : 'asc';
+                                    request('sortBy') == 'ciclo' && request('direction') == 'asc' ? 'desc' : 'asc';
                             @endphp
                             <a href="{{ route(Route::currentRouteName(), $queryParams) }}">
-                                Telefono
-                                @if (request('sortBy') == 'telefono')
+                                Ciclo
+                                @if (request('sortBy') == 'ciclo')
+                                    <i
+                                        class="bx {{ request('direction') == 'asc' ? 'bx-up-arrow-alt' : 'bx-down-arrow-alt' }}"></i>
+                                @endif
+                            </a>
+                        </th>
+
+                        <th>
+                            @php
+                                $queryParams = request()->query();
+                                $queryParams['sortBy'] = 'nombre_auditor';
+                                $queryParams['direction'] =
+                                    request('sortBy') == 'nombre_auditor' && request('direction') == 'asc'
+                                        ? 'desc'
+                                        : 'asc';
+                            @endphp
+                            <a href="{{ route(Route::currentRouteName(), $queryParams) }}">
+                                Nombre auditor
+                                @if (request('sortBy') == 'nombre_auditor')
                                     <i
                                         class="bx {{ request('direction') == 'asc' ? 'bx-up-arrow-alt' : 'bx-down-arrow-alt' }}"></i>
                                 @endif
@@ -142,23 +160,7 @@
                         </th>
 
                         <th>
-                            @php
-                                $queryParams = request()->query();
-                                $queryParams['sortBy'] = 'cuentaContrato';
-                                $queryParams['direction'] =
-                                    request('sortBy') == 'cuentaContrato' && request('direction') == 'asc' ? 'desc' : 'asc';
-                            @endphp
-                            <a href="{{ route(Route::currentRouteName(), $queryParams) }}">
-                                Cuenta contrato
-                                @if (request('sortBy') == 'cuentaContrato')
-                                    <i
-                                        class="bx {{ request('direction') == 'asc' ? 'bx-up-arrow-alt' : 'bx-down-arrow-alt' }}"></i>
-                                @endif
-                            </a>
-                        </th>
-
-                        <th>
-                            Ticket
+                            Excel
                         </th>
 
                         <th>
@@ -166,7 +168,7 @@
                         </th>
 
                         <th>
-                            Eliminar
+                            Eliminar registro
                         </th>
                     </tr>
                 </thead>
@@ -175,10 +177,11 @@
                         <tr>
                             <td>{{ $data->user->name }}</td>
                             <td>{{ $data->orden }}</td>
-                            <td class="table-cell-truncate">{{ $data->nombres }}</td>
-                            <td>{{ $data->telefono }}</td>
+                            <td>{{ $data->nombres }}</td>
+                            <td>{{ $data->ciclo }}</td>
+                            <td>{{ $data->nombre_auditor }}</td>
                             <td class="table-cell-truncate">{{ $data->direccion }}</td>
-                            <td>{{ $data->barrio }}</td>
+                            
                             <td><a href="{{ route('ticket.options', $data->id) }}"> <span
                                         style=" font-size: 30px; color: #ad0000; cursor: pointer;"
                                         class="material-symbols-outlined"> star_rate </span> </a></td>
@@ -190,7 +193,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" style="background:none; border:none; cursor:pointer;">
-                                        <i class='bx bx-trash' style="font-size:px; color:red;"></i>
+                                        <i class='bx bx-trash' style="font-size:23px; color:red;"></i>
                                     </button>
                                 </form>
                             </td>

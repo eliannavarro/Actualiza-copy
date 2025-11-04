@@ -15,19 +15,15 @@ class Data extends Model
         'direccion',
         'causanl_obs',
         'obs_adic',
+        'ciclo',
+        'nombre_auditor',
         
-        'medidor',
-        'lectura',
-        'aforo',
-        'resultado',
+        'lector',
+        'auditor',
+        'atendio_usuario',
         'observacion_inspeccion',
         'url_foto',
-        'firmaUsuario',
-        'firmaTecnico',
         'id_user',
-        'puntoHidraulico',
-        'numeroPersonas',
-        'categoria',
     ];
 
     protected static function boot()
@@ -58,10 +54,6 @@ class Data extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');
-    }
-
-    public function detalleVisita(){
-        return $this->hasMany(DetalleVisita::class, 'id_data');
     }
 }
 

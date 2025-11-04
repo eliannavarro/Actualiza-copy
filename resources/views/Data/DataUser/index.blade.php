@@ -25,7 +25,7 @@
 
 
     <div class="container">
-        @if(session('success'))
+        @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
@@ -71,7 +71,16 @@
                                 {{ $item->obs_adic }}
                             </td>
                         </tr>
-                        
+                        <tr>
+                            <td class="table-cell-truncate" colspan="5"><strong>Ciclo</strong>
+                                {{ $item->ciclo }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell-truncate" colspan="5"><strong>Nombre auditor</strong>
+                                {{ $item->nombre_auditor }}
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>

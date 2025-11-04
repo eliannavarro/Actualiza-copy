@@ -56,14 +56,6 @@
             @enderror
         </div>
     
-        <div class="form-group" id="firma-container" style="{{ old('rol') == 'user' ? '' : 'display: none;' }}">
-            <label for="firma">Firma <span style="color: rgb(246, 32, 32)">*</span></label>
-            <input type="file" class="form-control" id="firma" name="firma" accept="image/*">
-            @error('firma')
-                <div class="alert alert-danger mt-1">{{ $message }}</div>
-            @enderror
-        </div>
-    
         <div class="form-actions">
             <button type="button" class="btn btn-secondary" onclick="window.location.href='{{ route('users.index') }}'">
                 Cancelar

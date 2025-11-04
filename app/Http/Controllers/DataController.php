@@ -27,9 +27,6 @@ class DataController extends Controller
     {
         $visita = Data::findOrFail($id);
 
-        // Eliminar los detalles asociados
-        DetalleVisita::where('id_data', $visita->id)->delete();
-
         // Luego eliminar la visita
         $visita->delete();
 
@@ -80,7 +77,7 @@ class DataController extends Controller
         $direction = $request->get('direction', 'asc');
 
         // Validar que la columna y la dirección sean válidas
-        $validColumns = ['nombres', 'cuentaContrato', 'direccion', 'causanl_obs', 'obs_adic'];
+        $validColumns = ['nombres', 'cuentaContrato', 'direccion', 'causanl_obs', 'obs_adic', 'ciclo', 'nombre_auditor'];
         if (!in_array($sortBy, $validColumns)) {
             $sortBy = 'id';
         }
@@ -116,7 +113,7 @@ class DataController extends Controller
         $direction = $request->get('direction', 'asc'); // Dirección de orden por defecto
 
         // Validar la columna y la dirección de ordenamiento
-        $validColumns = ['nombres', 'cuentaContrato', 'direccion', 'causanl_obs', 'obs_adic'];
+        $validColumns = ['nombres', 'cuentaContrato', 'direccion', 'causanl_obs', 'obs_adic', 'ciclo', 'nombre_auditor'];
         if (!in_array($sortBy, $validColumns)) {
             $sortBy = 'id';
         }
@@ -148,6 +145,12 @@ class DataController extends Controller
 
         if ($request->filled('buscador-obs_adic')) {
             $query->where('correo', 'like', '%' . $request->input('buscador-obs_adic') . '%');
+        }
+        if ($request->filled('buscador-ciclo')) {
+            $query->where('ciclo', 'like', '%' . $request->input('buscador-ciclo') . '%');
+        }
+        if ($request->filled('buscador-nombre_auditor')) {
+            $query->where('nombre_auditor', 'like', '%' . $request->input('buscador-nombre_auditor') . '%');
         }
 
         // Aplicar el ordenamiento
@@ -185,7 +188,7 @@ class DataController extends Controller
         $direction = $request->get('direction', 'asc'); // Dirección por defecto
 
         // Validar que la columna y la dirección sean válidas
-        $validColumns = ['operario', 'nombres', 'cuentaContrato','direccion', 'causanl_obs', 'obs_adic'];
+        $validColumns = ['operario', 'nombres', 'cuentaContrato', 'direccion', 'causanl_obs', 'obs_adic', 'ciclo', 'nombre_auditor'];
         if (!in_array($sortBy, $validColumns)) {
             $sortBy = 'id';
         }
@@ -221,7 +224,7 @@ class DataController extends Controller
         $direction = $request->get('direction', 'asc'); // Dirección de orden por defecto
 
         // Validar la columna y la dirección de ordenamiento
-        $validColumns = ['operario', 'nombres', 'cuentaContrato', 'causanl_obs', 'obs_adic'];
+        $validColumns = ['operario', 'nombres', 'cuentaContrato', 'direccion', 'causanl_obs', 'obs_adic', 'ciclo', 'nombre_auditor'];
         if (!in_array($sortBy, $validColumns)) {
             $sortBy = 'id';
         }
@@ -257,6 +260,13 @@ class DataController extends Controller
 
         if ($request->filled('buscador-obs_adic')) {
             $query->where('obs_adic', 'like', '%' . $request->input('buscador-obs_adic') . '%');
+        }
+        if ($request->filled('buscador-ciclo')) {
+            $query->where('ciclo', 'like', '%' . $request->input('buscador-ciclo') . '%');
+        }
+
+        if ($request->filled('buscador-nombre_auditor')) {
+            $query->where('nombre_auditor', 'like', '%' . $request->input('buscador-nombre_auditor') . '%');
         }
 
         // Aplicar el ordenamiento
@@ -309,22 +319,7 @@ class DataController extends Controller
 
         $data = Data::findOrFail($id);
 
-        $resultados = [
-            "Fuga Imperceptible",
-            "Fuga Perceptible",
-            "Medidor Instalado en Reversa",
-            "Predio sin Fuga",
-            "Fuga No Visible No Localizada",
-            "Sector sin Suministro de Agua",
-            "Acceso Dificultoso",
-            "Revisión Inconclusa",
-            "Fuga Visible",
-            "Fuga En Instalación",
-            "No Hay Medidor en el Predio",
-            "Fuga Aguas Residuales",
-        ];
-
-        return view('Data.DataUser.edit', compact('data', 'resultados'));
+        return view('Data.DataUser.edit', compact('data'));
     }
 
 
@@ -334,58 +329,33 @@ class DataController extends Controller
 
         $direccion = $data->direccion;
 
-        $request->merge([
-            'numeroPersonas' => (int) $request->numeroPersonas,
-        ]);
-
         $validatedData = $request->validate([
-            'numeroPersonas' => 'required|integer',
-            'categoria' => 'required|string|in:residencial,comercial,industrial',
-            'puntoHidraulico' => 'required|integer',
-            'medidor' => 'required|string',
-            'lectura' => 'required|string',
-            'aforo' => 'required|string',
+
+            'lector' => 'required|string',
+            'auditor' => 'required|string',
+            'atendio_usuario' => 'required|string|in:si,no',
             'observacion_inspeccion' => 'required|string|max:700',
-            'resultado' => 'required|string',
             'foto' => 'required|image|mimes:jpeg,png,jpg,bmp,tiff|max:51200',
-            'firmaUsuario' => 'required|string',
-            // 'firmaTecnico' => 'required|string',
         ], [
-            'numeroPersonas.required' => 'El número de personas es obligatorio.',
-            'numeroPersonas.integer' => 'El número de personas debe ser un número válido.',
 
-            'categoria.required' => 'La categoría es obligatoria.',
-            'categoria.in' => 'La categoría debe ser Residencial, Comercial o Industrial.',
+            'auditor.required' => 'El medidor es obligatorio.',
+            'auditor.string' => 'El medidor debe ser un texto válido.',
 
-            'puntoHidraulico.required' => 'El punto hidráulico es obligatorio.',
-            'puntoHidraulico.integer' => 'El punto hidráulico debe ser un número válido.',
+            'lector.required' => 'La lectura es obligatoria.',
+            'lector.string' => 'El medidor debe ser un texto válido.',
 
-            'medidor.required' => 'El medidor es obligatorio.',
-            'medidor.string' => 'El medidor debe ser un texto válido.',
-
-            'lectura.required' => 'La lectura es obligatoria.',
-            'lectura.integer' => 'La lectura debe ser un número entero.',
-
-            'aforo.required' => 'El aforo es obligatorio.',
-            'aforo.string' => 'El aforo debe ser un texto válido.',
+            'atendio_usuario.required' => 'La categoría es obligatoria.',
+            'atendio_usuario.in' => 'si, no',
 
             'observacion_inspeccion.required' => 'La observación es obligatoria.',
             'observacion_inspeccion.string' => 'La observación debe ser un texto válido.',
             'observacion_inspeccion.max' => 'La observación no puede contener más de 700 caracteres.',
-
-            'resultado.required' => 'El resultado es obligatorio.',
-            'resultado.string' => 'El resultado debe ser un texto válido.',
 
             'foto.required' => 'La evidencia es obligatoria.',
             'foto.image' => 'La evidencia debe ser una imagen válida.',
             'foto.mimes' => 'La evidencia debe estar en formato JPEG, PNG, JPG, BMP o TIFF.',
             'foto.max' => 'La evidencia no debe superar los 50MB.',
 
-            'firmaUsuario.required' => 'La firma del usuario es obligatoria.',
-            'firmaUsuario.string' => 'La firma del usuario debe ser un texto válido.',
-
-            // 'firmaTecnico.required' => 'La firma del técnico es obligatoria.',
-            // 'firmaTecnico.string' => 'La firma del técnico debe ser un texto válido.',
         ]);
 
         $data->fill($validatedData);
@@ -403,32 +373,6 @@ class DataController extends Controller
 
         /// Guardamos SOLO la ruta relativa en BD
         $data->url_foto = $fotoPath;
-
-        try {
-            //  Guardar firma del CLIENTE
-            if ($request->has('firmaUsuario')) {
-                $image = $request->input('firmaUsuario');
-                $image = preg_replace('/^data:image\/\w+;base64,/', '', $image);
-                $imageData = base64_decode($image);
-
-                $firmaUsuarioFileName = uniqid() . '.png';
-                $firmaUsuarioPath = "Apptualiza/{$mesActual}/{$userFolder}/{$direccion}/firma del usuario/{$firmaUsuarioFileName}";
-
-                Storage::disk('public')->put($firmaUsuarioPath, $imageData);
-
-                //  Guardar solo en la tabla `data`
-                $data->firmaUsuario = $firmaUsuarioPath;
-            }
-
-            //  Guardar la firma del técnico (ya creada al registrar su usuario)
-            $user = auth()->user();
-            if ($user && $user->firma_path) {
-                $data->firmaTecnico = $user->firma_path;
-            }
-
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Error al procesar las firmas: ' . $e->getMessage());
-        }
 
         // Cambiar el estado y guardar todo
         $data->estado = 1;
@@ -450,18 +394,25 @@ class DataController extends Controller
     {
         $validatedData = $request->validate([
             'nombres' => 'required|string|max:255|regex:/^[\pL0-9\s\-]+$/u',
+            'nombre_auditor' => 'required|string|max:255|regex:/^[\pL0-9\s\-]+$/u',
             'cuentaContrato' => 'required|string|max:255|regex:/^[^#]+$/',
             'direccion' => 'required|string|max:255|regex:/^[^#]+$/',
             'causanl_obs' => 'required|string|max:250',
             'obs_adic' => 'required|string|max:255',
+            'ciclo' => 'required|string|in:105, 114, 119, 123',
+
         ], [
             'nombres.required' => 'El nombre es obligatorio.',
             'nombres.regex' => 'El nombre solo puede contener letras mayusculas, minusculas, espacios, guiones y numeros.',
+            'nombre_auditor' => 'El nombre del auditor es obligatorio.',
             'cuentaContrato.required' => 'La cuenta contrato es obligatoria.',
             'direccion.required' => 'La dirección es obligatoria.',
             'direccion.regex' => 'Solo ingrese caracteres alfanuméricos.',
             'causanl_obs.required' => 'El causanl_obs es obligatorio.',
             'obs_adic.required' => 'El obs_adic es obligatorio.',
+            'ciclo.required' => 'La categoría es obligatoria.',
+            'ciclo.in' => '105, 114, 119, 123',
+
         ]);
         // Crear registro
         $data = Data::create($validatedData);
@@ -516,7 +467,7 @@ class DataController extends Controller
         $direction = $request->get('direction', 'asc'); // Dirección por defecto
 
         // Validar que la columna y la dirección de ordenamiento sean válidas
-        $validColumns = ['operario', 'nombres', 'direccion', 'cuentaContrato', 'causanl_obs', 'obs_adic'];
+        $validColumns = ['operario', 'nombres', 'direccion', 'cuentaContrato', 'causanl_obs', 'obs_adic', 'ciclo', 'nombre_auditor'];
         if (!in_array($sortBy, $validColumns)) {
             $sortBy = 'id';
         }
@@ -540,97 +491,80 @@ class DataController extends Controller
         ]);
     }
 
-
     public function editCompletados($dataId)
     {
         $data = Data::find($dataId);
 
-        $resultados = [
-            "Fuga Imperceptible",
-            "Fuga Perceptible",
-            "Medidor Instalado en Reversa",
-            "Predio sin Fuga",
-            "Fuga No Visible No Localizada",
-            "Sector sin Suministro de Agua",
-            "Acceso Dificultoso",
-            "Revisión Inconclusa",
-            "Fuga Visible",
-            "Fuga En Instalación",
-            "No Hay Medidor en el Predio",
-            "Fuga Aguas Residuales",
+        $atendio_usuario = [
+            "si",
+            "no",
         ];
 
-        return view('Data.Completados.edit', compact('data', 'resultados', 'ciclos'));
+        $ciclo =
+            [
+                "105",
+                "114",
+                "119",
+                "123",
+            ];
+
+        return view('Data.Completados.edit', compact('data', 'ciclo', 'atendio_usuario'));
     }
     public function updateCompletados(Request $request, $dataId)
     {
         $data = Data::findOrFail($dataId);
 
-        
+
         $validatedData = $request->validate([
             // Nuevas validaciones agregadas
             'nombres' => 'required|string|max:255|regex:/^[\pL\s\-]+$/u',
-            'cedula' => 'required|numeric|digits_between:6,10',
             'direccion' => 'required|string|max:255|regex:/^[^#]+$/',
-            'barrio' => 'required|string|max:100',
-            'telefono' => 'required|digits:10',
-            'correo' => 'nullable|email|max:255',
-            'numeroPersonas' => 'required|integer',
-            'categoria' => 'required|string|in:residencial,comercial,industrial',
-            'puntoHidraulico' => 'required|integer',
-            'medidor' => 'required|string',
-            'lectura' => 'required|string',
-            'aforo' => 'required|string',
+            'cuentaContrato' => 'required|string|max:100',
+            'nombre_auditor' => 'required|string|max:100',
+            'causanl_obs' => 'required|string|max:220',
+            'obs_adic' => 'required|string|max:220',
+            'ciclo' => 'required|string|in:105, 114, 119, 123',
+
+            'atendio_usuario' => 'required|string|in:si,no',
+            'lector' => 'required|string',
+            'auditor' => 'required|string',
             'observacion_inspeccion' => 'required|string',
-            'resultado' => 'required|string',
         ], [
             'nombres.required' => 'El nombre es obligatorio.',
             'nombres.regex' => 'El nombre solo puede contener letras, espacios y guiones.',
 
-            'cedula.required' => 'La cédula es obligatoria.',
-            'cedula.numeric' => 'La cédula solo puede contener números.',
-            'cedula.digits_between' => 'La cédula debe tener entre 6 y 10 dígitos.',
-
             'direccion.required' => 'La dirección es obligatoria.',
             'direccion.regex' => 'Solo ingrese caracteres alfanuméricos.',
 
-            'barrio.required' => 'El barrio es obligatorio.',
+            'cuentaContrato.required' => 'obligatorio',
 
-            'telefono.required' => 'El teléfono es obligatorio.',
-            'telefono.digits' => 'El teléfono debe contener exactamente 10 dígitos.',
+            'causanl_obs' => 'obligatorio',
 
-            'correo.email' => 'Debe ingresar un correo válido.',
+            'obs_adic.required' => 'obligatorio.',
 
-            'ciclo.string' => 'Debe ingresar un ciclo válido.',
-            'ciclo.in' => 'Debe ingresar un ciclo válido.',
+            'nombre_auditor' => 'El nombre del auditor es obligatorio.',
 
-            'numeroPersonas.required' => 'El número de personas es obligatorio.',
-            'numeroPersonas.integer' => 'El número de personas debe ser un número válido.',
+            'ciclo.required' => 'La categoría es obligatoria.',
+            'ciclo.in' => '105, 114, 119, 123',
 
-            'categoria.required' => 'La categoría es obligatoria.',
-            'categoria.in' => 'La categoría debe ser Residencial, Comercial o Industrial.',
+            'atendio_usuario.required' => 'La categoría es obligatoria.',
+            'atendio_usuario.in' => 'si, no',
 
-            'puntoHidraulico.required' => 'El punto hidráulico es obligatorio.',
-            'puntoHidraulico.integer' => 'El punto hidráulico debe ser un número válido.',
-
-            'medidor.required' => 'El medidor es obligatorio.',
-            'medidor.string' => 'El medidor debe ser un texto válido.',
+            'lector.required' => 'obligatorio.',
 
             'lectura.required' => 'La lectura es obligatoria.',
 
-            'aforo.required' => 'El aforo es obligatorio.',
-            'aforo.string' => 'El aforo debe ser un texto válido.',
+            'auditor.required' => 'obligatorio.',
 
             'observacion_inspeccion.required' => 'La observación es obligatoria.',
             'observacion_inspeccion.string' => 'La observación debe ser un texto válido.',
 
-            'resultado.required' => 'El resultado es obligatorio.',
-            'resultado.string' => 'El resultado debe ser un texto válido.',
         ]);
 
         $data->fill($validatedData);
 
         $data->estado = 1;
+        $data->save();
 
         return redirect()->route('ticket.options', ['id' => $data->id])->with('success', 'Datos actualizados correctamente');
     }
@@ -650,7 +584,7 @@ class DataController extends Controller
         $direction = $request->get('direction', 'asc'); // Dirección de orden por defecto
 
         // Validar la columna y la dirección de ordenamiento
-        $validColumns = ['operario', 'nombres', 'direccion', 'telefono', 'correo', 'orden'];
+        $validColumns = ['operario', 'nombres', 'direccion', 'cuentaContrato', 'nombre_auditor'];
         if (!in_array($sortBy, $validColumns)) {
             $sortBy = 'id';
         }
@@ -733,10 +667,10 @@ class DataController extends Controller
                 'datas' => $datas,
                 'ciclos' => $ciclos,
                 'pagination' => [
-                        'total' => $datas->total(),
-                        'current_page' => $datas->currentPage(),
-                        'last_page' => $datas->lastPage(),
-                    ]
+                    'total' => $datas->total(),
+                    'current_page' => $datas->currentPage(),
+                    'last_page' => $datas->lastPage(),
+                ]
             ]);
         }
 

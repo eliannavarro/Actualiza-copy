@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => bcrypt('123456'),
             'rol' => 'admin',
-            'firma_path' => null,
         ]);
     }
 }

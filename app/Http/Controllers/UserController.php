@@ -53,18 +53,11 @@ class UserController extends Controller
             'rol.string' => 'El rol debe ser una cadena de texto.',
         ]);
 
-        if ($request->rol == 'user') {
-            $request->validate([
-                'firma' => 'required|file|image|max:5048',
-            ]);
-        }
-
         $user = new User();
         $user->name = $request['name'];
         $user->email = $request['email'];
         $user->password = Hash::make($request['password']);
         $user->rol = $request['rol'];
-
 
         $user->save();
 

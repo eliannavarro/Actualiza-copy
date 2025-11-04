@@ -75,10 +75,32 @@
                         <div class="alert alert-danger mt-1">{{ $message }}</div>
                     @enderror
                 </div>
+                {{-- Ciclo --}}
+                <div class="mb-3">
+                    <label for="ciclo" class="form-label">Ciclo</label>
+                   <select name="ciclo" id="ciclo" class="form-control">
+                        <option value="">Seleccione el ciclo</option>
+                            <option value="105" {{ old('105') == '105' ? 'selected' : '' }}>105</option>
+                            <option value="114" {{ old('114') == '114' ? 'selected' : '' }}>114</option>
+                            <option value="119" {{ old('119') == '119' ? 'selected' : '' }}>119</option>
+                            <option value="123" {{ old('123') == '123' ? 'selected' : '' }}>123</option>              
+                    </select>   
+                    @error('ciclo')
+                        <div class="alert alert-danger mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+                {{-- Auditor --}}
+                <div class="mb-3">
+                    <label for="nombre_auditor" class="form-label">Auditor</label>
+                    <input type="text" class="form-control" id="nombre_auditor" name="nombre_auditor"
+                        value="{{ $data->nombre_auditor ?? old('nombre_auditor') }}" placeholder="">
+                    @error('nombre_auditor')
+                        <div class="alert alert-danger mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
 
                 {{-- Ajustar el botón de registrar para que no se vea pegado --}}
                 <br>
-                <input type="hidden" name="total" id="total_con_iva_input" value="0">
                 {{-- Botón de envío --}}
                 <button type="submit" class="btn btn-primary">
                     {{ isset($data) ? 'Actualizar' : 'Registrar' }}

@@ -19,7 +19,6 @@ class User extends Authenticatable
         'email',
         'password',
         'rol',
-        'firma_path',
     ];
 
     protected $hidden = ['password', 'remember_token'];
@@ -34,8 +33,5 @@ class User extends Authenticatable
      *
      * @return string|null
      */
-    public function getFirmaUrlAttribute()
-    {
-        return $this->firma_path ? Storage::url($this->firma_path) : null;
-    }
+    
 }
