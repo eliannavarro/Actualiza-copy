@@ -11,7 +11,7 @@
 @section('content')
     <div class="container">
         <div class="header-container">
-            <h2>Exportar Auditoria en terreno</h2>
+            <h2>Auditoria en terreno</h2>
         </div>
 
         @if(session('success'))
@@ -41,14 +41,9 @@
                 <!-- Botón para Exportar a Excel -->
                 <form id="exportForm" action="{{ route('export.excel') }}" method="GET">
                     <input type="hidden" name="ciclo" id="exportCiclo">
-                    <button type="submit" class="btn btn-primary">Exportar parcial</button>
+                    <button type="submit" class="btn btn-primary">Descargar Excel</button>
                 </form>
-
-                <!-- Botón para Exportar a Excel con todos los campos -->
-                <form id="exportForm" action="{{ route('export.excel.complete') }}" method="GET">
-                    <input type="hidden" name="ciclo" id="exportCiclo">
-                    <button type="submit" class="btn btn-primary">Exportar completo</button>
-                </form>
+            
             </div>
 
 
@@ -59,12 +54,13 @@
                     <thead>
                         <tr>
                             <th>Ciclo</th>
-                            <th>Dirección</th>
-                            <th>Medidor</th>
-                            <th>Nombres</th>
-                            <th>Resultado</th>
+                            <th>Operario</th>
+                            <th>Cliente</th>
+                            <th>Cuenta contrato</th>
+                            <th>Nombre auditor</th>
                             <th>Observación</th>
                         </tr>
+                       
                     </thead>
                     <tbody id="table-body"></tbody>
                 </table>
@@ -118,10 +114,10 @@
                         var row = document.createElement("tr");
                         row.innerHTML = `
                         <td>${item.ciclo}</td>
-                        <td class="table-cell-truncate">${item.direccion}</td>
-                        <td>${item.medidor}</td>
+                        <td>${item.user}</td>
                         <td>${item.nombres}</td>
-                        <td>${item.resultado}</td>
+                        <td class="table-cell-truncate">${item.cuentaContrato}</td>
+                        <td>${item.nombre_auditor}</td>
                         <td>${item.observacion_inspeccion}</td>
                         `;
                         tableBody.appendChild(row);

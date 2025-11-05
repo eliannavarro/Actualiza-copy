@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Descargar Ticket</title>
+    <title>D</title>
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/Datas/download.css') }}" rel="stylesheet">
@@ -31,18 +31,10 @@
         <p>Por favor, selecciona una opción:</p>
 
         <div class="buttons">
-            <!-- Botones para visualizar pdfs de la visita en el navegador -->
-            <a href="{{route('ticket.generate', $data->id)}}" target="_blank">Visualizar Ticket</a>
-            
-            <a href="{{route('acta.generate', $data->id)}}" target="_blank">Visualizar Acta de revisión técnica</a>
-            
-            @if (Auth::user()->rol==='admin')
-                <a href="{{route('remision.generate', $data->id)}}" target="_blank">Visualizar remisión</a>
-            @endif
-
+           @if (Auth::user()->rol==='user')
             <!-- Botón para descargar el ticket -->
-            <a href="{{ route('ticket.download',$data->id) }}" >Descargar Ticket</a>
-
+            <a href="{{ route('export',$data->id) }}" >Descargar Excel</a>
+            @endif
 
             <!-- Botón para finalizar -->
             @if (Auth::user()->rol==='admin')

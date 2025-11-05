@@ -530,8 +530,8 @@ class DataController extends Controller
             'auditor' => 'required|string',
             'observacion_inspeccion' => 'required|string',
         ], [
-            'nombres.required' => 'El nombre es obligatorio.',
-            'nombres.regex' => 'El nombre solo puede contener letras, espacios y guiones.',
+             'nombres.required' => 'El nombre es obligatorio.',
+            'nombres.regex' => 'El nombre solo puede contener letras mayusculas, minusculas, espacios, guiones y numeros.',
 
             'direccion.required' => 'La dirección es obligatoria.',
             'direccion.regex' => 'Solo ingrese caracteres alfanuméricos.',
@@ -700,29 +700,5 @@ class DataController extends Controller
 
         // Realizar la exportación a Excel con el nombre generado
         return Excel::download(new DataExport($ciclo), $nombreArchivo);
-    }
-
-    public function exportDataComplete(Request $request)
-    {
-        $ciclo = $request->input('ciclo');
-
-        if ($ciclo === 'null') {
-            return redirect()->back()->with('error', 'Debes seleccionar un ciclo para exportar.');
-        }
-        // Filtrar los registros según el ciclo y el estado = 1
-        $query = Data::where('estado', 1);
-        if ($ciclo && $ciclo !== 'all') {
-            $query->where('ciclo', $ciclo);
-        }
-        // Obtener la cantidad de registros que serán exportados
-        $cantidadRegistros = $query->count();
-        // Obtener la hora actual
-        $horaActual = now()->format('Y-m-d_H-i-s');  // Formato: año-mes-día_hora-minuto-segundo
-
-        // Crear el nombre del archivo
-        $nombreArchivo = 'Apptualiza_' . $horaActual . '_' . $cantidadRegistros . '.xlsx';
-
-        // Realizar la exportación a Excel con el nombre generado
-        return Excel::download(new DataExportComplete($ciclo), $nombreArchivo);
     }
 }
