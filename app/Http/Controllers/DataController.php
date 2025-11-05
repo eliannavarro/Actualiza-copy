@@ -309,7 +309,7 @@ class DataController extends Controller
             });
 
         // Obtener los datos paginados
-        $data = $query->paginate(1);
+        $data = $query->paginate();
 
         return view('Data.DataUser.index', compact('data'));
     }
