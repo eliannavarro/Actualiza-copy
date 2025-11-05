@@ -130,7 +130,7 @@
                     @csrf
                     <button type="submit" class="btn btn-tertiary">
                         <i class='bx bx-edit'></i>
-                        Actualizar
+                        Realizar
                     </button>
                 </form>
             @endif

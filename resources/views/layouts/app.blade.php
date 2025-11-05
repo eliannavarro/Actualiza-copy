@@ -24,7 +24,7 @@
         <header>
             <div class="image-text">
                 <div class="text logo-text">
-                    <span class="name">Apptualiza</span>
+                    <span class="name">RIB CONTROL</span>
                 </div>
             </div>
 
@@ -50,13 +50,6 @@
 
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="{{ route('home') }}">
-                            <i class='bx bx-home-alt icon'></i>
-                            <span class="text nav-text">General</span>
-                        </a>
-                    </li>
-                    
-                    <li class="nav-link">
                         <a href="{{ route('users.index') }}">
                             <i class='bx bx-user icon' ></i>
                             <span class="text nav-text">Usuarios</span>
@@ -66,7 +59,7 @@
                     <li class="nav-link">
                         <a href="{{ route('asignar.index') }}">
                             <i class='bx bxs-edit icon'></i>
-                            <span class="text nav-text">Asignar</span>
+                            <span class="text nav-text">Asignar </span>
                         </a>
                     </li>
 

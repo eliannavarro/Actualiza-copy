@@ -11,7 +11,7 @@
 @section('content')
     <div class="container">
         <div class="header-container">
-            <h2>Exportar Órdenes Actualizadas</h2>
+            <h2>Exportar Auditoria en terreno</h2>
         </div>
 
         @if(session('success'))
