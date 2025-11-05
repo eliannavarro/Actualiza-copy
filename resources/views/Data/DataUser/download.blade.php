@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>D</title>
+    <title>Descargar Excel</title>
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/Datas/download.css') }}" rel="stylesheet">
@@ -31,11 +31,10 @@
         <p>Por favor, selecciona una opción:</p>
 
         <div class="buttons">
-           @if (Auth::user()->rol==='user')
+           @if (Auth::user()->rol==='admin')
             <!-- Botón para descargar el ticket -->
             <a href="{{ route('export',$data->id) }}" >Descargar Excel</a>
-            @endif
-
+           @endif
             <!-- Botón para finalizar -->
             @if (Auth::user()->rol==='admin')
                 <a href="{{ route('completados.index') }}" class="finalizar">Finalizar</a>
