@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DataController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\DataUserController;
 
 Auth::routes();
 
@@ -41,10 +42,12 @@ Route::middleware(['auth', CheckRole::class . ':admin'])->group(function () {
     Route::post('/desasignar-operario', [DataController::class, 'desasignarOperario'])->name('desasignar.operario');
 
     //USERDATA
+    Route::get('/datauser/asignados', [DataUserController::class, 'index'])->name('datauser.asignados');
+    Route::get('/datauser/completados', [DataUserController::class, 'completados'])->name('datauser.completados');
     Route::get('/asignados', [DataController::class, 'asignadosListar'])->name('asignados.index');
     Route::get('/asignados/edit/{data}', [DataController::class, 'asignadosEdit'])->name('asignados.edit');
     Route::put('/operario/update/{id}', [DataController::class, 'asignadosUpdate'])->name('asignados.update');
-
+    
     //AGENDA
     Route::get('/agendar', [DataController::class, 'create'])->name('schedule.create'); // Formulario vacío (nuevo)
     Route::get('/agendar/{id}', [DataController::class, 'edit'])->name('schedule.edit'); // Formulario con datos existentes
@@ -59,8 +62,7 @@ Route::middleware(['auth', CheckRole::class . ':admin'])->group(function () {
     Route::put('/completados-editar/{id}', [DataController::class, 'updateCompletados'])->name('completados.update');
 
     Route::delete('/completados-eliminar/{dataId}', [DataController::class, 'completadosDestroy'])->name('completados.destroy');
-
-    //EXPORTAR EXCEL
+ //EXPORTAR EXCEL
      Route::get('/export-filtrar', [DataController::class, 'exportarFiltrar'])->name('export.filtrar');
     Route::get('/export', [DataController::class, 'exportarIndex'])->name('export');
     Route::get('/database/download', [DataController::class, 'download'])->name('database.download');
@@ -73,16 +75,23 @@ Route::middleware(['auth', CheckRole::class . ':admin'])->group(function () {
 });
 
 Route::middleware(['auth', CheckRole::class . ':user'])->group(function () {
-    //USERDATA
+    // Pendientes (asignados)
+    Route::get('/datauser/asignados', [DataUserController::class, 'index'])->name('datauser.asignados');
+
+    // Completados (usuarios normales)
+    Route::get('/datauser/completados', [DataUserController::class, 'completados'])->name('datauser.completados');
+
+    // Asignados (editar y actualizar)
     Route::get('/asignados', [DataController::class, 'asignadosListar'])->name('asignados.index');
     Route::get('/asignados/edit/{data}', [DataController::class, 'asignadosEdit'])->name('asignados.edit');
     Route::put('/operario/update/{id}', [DataController::class, 'asignadosUpdate'])->name('asignados.update');
 
-    //TICKETS 
+    // Tickets
     Route::get('/ticket-options/{id}', [TicketController::class, 'showTicketOptions'])->name('ticket.options');
     Route::get('/ticket-generate/{id}', [TicketController::class, 'generateTicket'])->name('ticket.generate');
     Route::get('/ticket-download/{id}', [TicketController::class, 'downloadTicket'])->name('ticket.download');
 });
+
 
 
 Route::middleware('auth')->group(function () {
@@ -95,8 +104,4 @@ Route::middleware('auth')->group(function () {
     Route::get('/acta-generate/{id}', [TicketController::class, 'generateActa'])->name('acta.generate');
 
     Route::get('/remision-generate/{id}', [TicketController::class, 'generateRemision'])->name('remision.generate');
-
-    
 });
-
-
