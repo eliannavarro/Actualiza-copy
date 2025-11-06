@@ -88,7 +88,7 @@
                     <li class="nav-link">
                         <a href="{{ route('import.import') }}">
                             <i class='bx bx-upload icon' ></i>
-                            <span class="text nav-text">Cargar Excel</span>
+                            <span class="text nav-text">Importar Excel</span>
                         </a>
                     </li>
 
@@ -96,7 +96,7 @@
                     <li class="nav-link">
                         <a href="{{ route('export') }}">
                             <i class='bx bx-download icon' ></i>
-                            <span class="text nav-text">Generar Excel</span>
+                            <span class="text nav-text">Descargar Excel</span>
                         </a>
                     </li>
 

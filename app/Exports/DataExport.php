@@ -23,18 +23,19 @@ class DataExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSize
 
     public function query()
     {
-        // Aplicar filtro de ciclo si se proporciona y asegurar que estado sea 1
-        return Data::query()
+        return Data::with('user') // 👈 esto es lo importante
             ->where('estado', 1)
             ->when($this->ciclo, function ($query) {
                 return $query->where('ciclo', $this->ciclo);
             });
     }
 
+
     public function headings(): array
     {
         return [
             'Orden',
+            'Operario',
             'Ciclo',
             'Cliente',
             'Nombre auditor',
@@ -46,7 +47,7 @@ class DataExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSize
             'Auditor',
             'Atendio usuario',
             'Observación Inspección',
-            'Fecha',
+            'Fecha de finalización',
         ];
     }
 
@@ -54,6 +55,7 @@ class DataExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSize
     {
         return [
             $data->orden,
+            optional($data->user)->name,
             $data->ciclo,
             $data->nombres,
             $data->nombre_auditor,
@@ -65,7 +67,6 @@ class DataExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSize
             $data->auditor,
             $data->atendio_usuario,
             $data->observacion_inspeccion,
-            optional($data->user)->name,
             $data->created_at ? $data->created_at->format('Y-m-d') : 'Unknow'
             // $data->url_foto,
             // $data->firmaUsuario, 
@@ -81,17 +82,17 @@ class DataExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSize
             AfterSheet::class => function (AfterSheet $event) {
                 $sheet = $event->sheet->getDelegate();
                 $ultimaFila = $sheet->getHighestRow(); // Última fila con datos
-
+    
                 // $columnUsuario = 'M'; // Columna donde se colocará la firma del usuario
                 // $columnTecnico = 'N'; // Columna donde se colocará la firma del técnico 
-
+    
                 // // Primer ciclo: Para la firma del usuario
                 // for ($row = 2; $row <= $ultimaFila; $row++) {
                 //     $cellValue = $sheet->getCell($columnUsuario . $row)->getValue();
-
+    
                 //     if ($cellValue) {
                 //         $filePath = Storage::disk('public')->path($cellValue); // Ruta completa
-
+    
                 //         // Verificar si el archivo existe
                 //         if (file_exists($filePath)) {
                 //             $drawing = new Drawing();
@@ -101,11 +102,11 @@ class DataExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSize
                 //             $drawing->setHeight(40); // Ajusta el tamaño de la imagen
                 //             $drawing->setCoordinates($columnUsuario . $row); // Coordenadas de la celda
                 //             $drawing->setWorksheet($sheet); // Asignar la hoja
-
+    
                 //             // Redimensionar la celda para coincidir con la imagen
                 //             $sheet->getColumnDimension($columnUsuario)->setWidth(15);
                 //             $sheet->getRowDimension($row)->setRowHeight(35);
-
+    
                 //             // Limpiar el contenido de la celda
                 //             $sheet->getCell($columnUsuario . $row)->setValue(null);
                 //         } else {
@@ -114,14 +115,14 @@ class DataExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSize
                 //         }
                 //     }
                 // }
-
+    
                 // // Segundo ciclo: Para la firma del técnico
                 // for ($row = 2; $row <= $ultimaFila; $row++) {
                 //     $cellValue = $sheet->getCell($columnTecnico . $row)->getValue();
-
+    
                 //     if ($cellValue) {
                 //         $filePath = Storage::disk('public')->path($cellValue); // Ruta completa
-
+    
                 //         // Verificar si el archivo existe
                 //         if (file_exists($filePath)) {
                 //             $drawing = new Drawing();
@@ -131,11 +132,11 @@ class DataExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSize
                 //             $drawing->setHeight(40); // Ajusta el tamaño de la imagen
                 //             $drawing->setCoordinates($columnTecnico . $row); // Coordenadas de la celda
                 //             $drawing->setWorksheet($sheet); // Asignar la hoja
-
+    
                 //             // Redimensionar la celda para coincidir con la imagen
                 //             $sheet->getColumnDimension($columnTecnico)->setWidth(15);
                 //             $sheet->getRowDimension($row)->setRowHeight(35);
-
+    
                 //             // Limpiar el contenido de la celda
                 //             $sheet->getCell($columnTecnico . $row)->setValue(null);
                 //         } else {
@@ -144,7 +145,7 @@ class DataExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSize
                 //         }
                 //     }
                 // }
-                            
+    
 
                 // Aplicar estilo a los encabezados
                 $sheet->getStyle('A1:S1')->applyFromArray([

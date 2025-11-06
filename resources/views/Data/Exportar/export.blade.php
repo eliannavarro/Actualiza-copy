@@ -12,6 +12,8 @@
     <div class="container">
         <div class="header-container">
             <h2>Auditoria en terreno</h2>
+            <p>Descargar por ciclo</p>
+            <br>
         </div>
 
         @if(session('success'))
@@ -46,15 +48,13 @@
             
             </div>
 
-
-
             <!-- Tabla de resultados -->
             <div id="table-wrapper" style="display:none;">
                 <table class="assignment-table">
                     <thead>
                         <tr>
                             <th>Ciclo</th>
-                            <th>Operario</th>
+                            <th>Id Operario</th>
                             <th>Cliente</th>
                             <th>Cuenta contrato</th>
                             <th>Nombre auditor</th>
@@ -114,7 +114,7 @@
                         var row = document.createElement("tr");
                         row.innerHTML = `
                         <td>${item.ciclo}</td>
-                        <td>${item.user}</td>
+                        <td>${item.id_user}</td>
                         <td>${item.nombres}</td>
                         <td class="table-cell-truncate">${item.cuentaContrato}</td>
                         <td>${item.nombre_auditor}</td>

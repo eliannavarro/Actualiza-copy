@@ -61,12 +61,12 @@ Route::middleware(['auth', CheckRole::class . ':admin'])->group(function () {
     Route::delete('/completados-eliminar/{dataId}', [DataController::class, 'completadosDestroy'])->name('completados.destroy');
 
     //EXPORTAR EXCEL
+     Route::get('/export-filtrar', [DataController::class, 'exportarFiltrar'])->name('export.filtrar');
     Route::get('/export', [DataController::class, 'exportarIndex'])->name('export');
-    Route::get('/export-filtrar', [DataController::class, 'exportarFiltrar'])->name('export.filtrar');
+    Route::get('/database/download', [DataController::class, 'download'])->name('database.download');
     Route::get('/export-data', [DataController::class, 'exportData'])->name('export.excel');
     Route::get('/export-data-complete', [DataController::class, 'exportDataComplete'])->name('export.excel.complete');
-
-    Route::get('/database/download', [DataController::class, 'download'])->name('database.download');
+   
     
     //RUTAS PARA SERVICIOS
     Route::resource('servicio', ServicioController::class);
@@ -95,4 +95,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/acta-generate/{id}', [TicketController::class, 'generateActa'])->name('acta.generate');
 
     Route::get('/remision-generate/{id}', [TicketController::class, 'generateRemision'])->name('remision.generate');
+
+    
 });
+
+

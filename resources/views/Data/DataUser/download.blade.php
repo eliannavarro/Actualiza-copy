@@ -27,8 +27,6 @@
             </div>
         @endif
 
-        <h1>Ticket Generado</h1>
-        <p>Por favor, selecciona una opción:</p>
 
         <div class="buttons">
            @if (Auth::user()->rol==='admin')
@@ -39,7 +37,7 @@
             @if (Auth::user()->rol==='admin')
                 <a href="{{ route('completados.index') }}" class="finalizar">Finalizar</a>
             @elseif (Auth::user()->rol==='user')
-                <a href="{{ route('asignados.index') }}" class="finalizar">Finalizar</a>
+                <a href="{{ route('asignados.index') }}" class="finalizar">volver</a>
             @endif
         </div>
     </div>
