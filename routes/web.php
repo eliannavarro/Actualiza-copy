@@ -62,7 +62,8 @@ Route::middleware(['auth', CheckRole::class . ':admin'])->group(function () {
     Route::put('/completados-editar/{id}', [DataController::class, 'updateCompletados'])->name('completados.update');
 
     Route::delete('/completados-eliminar/{dataId}', [DataController::class, 'completadosDestroy'])->name('completados.destroy');
- //EXPORTAR EXCEL
+
+    //EXPORTAR EXCEL
      Route::get('/export-filtrar', [DataController::class, 'exportarFiltrar'])->name('export.filtrar');
     Route::get('/export', [DataController::class, 'exportarIndex'])->name('export');
     Route::get('/database/download', [DataController::class, 'download'])->name('database.download');
@@ -74,6 +75,7 @@ Route::middleware(['auth', CheckRole::class . ':admin'])->group(function () {
     Route::resource('servicio', ServicioController::class);
 });
 
+
 Route::middleware(['auth', CheckRole::class . ':user'])->group(function () {
     // Pendientes (asignados)
     Route::get('/datauser/asignados', [DataUserController::class, 'index'])->name('datauser.asignados');
@@ -82,6 +84,7 @@ Route::middleware(['auth', CheckRole::class . ':user'])->group(function () {
     Route::get('/datauser/completados', [DataUserController::class, 'completados'])->name('datauser.completados');
 
     // Asignados (editar y actualizar)
+    Route::get('/datauser/asignados', [DataController::class, 'asignadosListar'])->name('datauser.asignados');
     Route::get('/asignados', [DataController::class, 'asignadosListar'])->name('asignados.index');
     Route::get('/asignados/edit/{data}', [DataController::class, 'asignadosEdit'])->name('asignados.edit');
     Route::put('/operario/update/{id}', [DataController::class, 'asignadosUpdate'])->name('asignados.update');
