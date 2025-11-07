@@ -79,12 +79,14 @@ Route::middleware(['auth', CheckRole::class . ':admin'])->group(function () {
 Route::middleware(['auth', CheckRole::class . ':user'])->group(function () {
     // Pendientes (asignados)
     Route::get('/datauser/asignados', [DataUserController::class, 'index'])->name('datauser.asignados');
-
+ 
+    // odenes (usuarios normales)
     // Completados (usuarios normales)
     Route::get('/datauser/completados', [DataUserController::class, 'completados'])->name('datauser.completados');
-
+    // pendientes (usuarios normales)
+    Route::get('/datauser/pendientes', [DataUserController::class, 'asignadospendientes'])->name('datauser.pendientes');
+    
     // Asignados (editar y actualizar)
-    Route::get('/datauser/asignados', [DataController::class, 'asignadosListar'])->name('datauser.asignados');
     Route::get('/asignados', [DataController::class, 'asignadosListar'])->name('asignados.index');
     Route::get('/asignados/edit/{data}', [DataController::class, 'asignadosEdit'])->name('asignados.edit');
     Route::put('/operario/update/{id}', [DataController::class, 'asignadosUpdate'])->name('asignados.update');

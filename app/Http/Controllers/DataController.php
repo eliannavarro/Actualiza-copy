@@ -314,6 +314,7 @@ class DataController extends Controller
         return view('Data.DataUser.index', compact('data'));
     }
 
+
     public function asignadosEdit($id)
     {
 

@@ -47,17 +47,43 @@ class DataUserController extends Controller
 
         return view('Data.DataUser.completados', compact('datas', 'sortBy', 'direction', 'totalResultados'));
     }
-
-    public function index()
+    public function asignadospendientes(Request $request)
     {
-        $userId = Auth::id(); // ← Solo órdenes del usuario autenticado
+        $userId = Auth::user()->id;
+        session(['previous_url' => $request->fullUrl()]);
 
-        // Solo pendientes
-        $data = Data::where('estado', 'Pendiente')
-                    ->where('id_user', $userId)
-                    ->get();
 
-        return view('Data.DataUser.index', compact('data'));
+        // Crear la consulta base
+        $query = Data::where('id_user', $userId)
+            ->where(function ($query) {
+                $query->where('estado', 0)
+                    ->orWhereNull('estado');
+            });
+
+        // Obtener los datos paginados
+        $data = $query->paginate();
+
+        return view('Data.DataUser.pendientes', compact('data'));
     }
-    
+
+public function index(Request $request)
+{
+    $userId = Auth::id();
+    $search = $request->input('search');
+
+    $data = Data::where('id_user', $userId)
+                ->when($search, function($query, $search) {
+                    $query->where(function($q) use ($search) {
+                        $q->where('nombres', 'like', "%{$search}%")
+                          ->orWhere('ciclo', 'like', "%{$search}%")
+                          ->orWhere('direccion', 'like', "%{$search}%");
+                    });
+                })
+                ->orderBy('created_at', 'desc')
+                ->paginate(1)
+                ->appends($request->only('search'));
+
+    return view('Data.DataUser.index', compact('data', 'search'));
+}
+
 }

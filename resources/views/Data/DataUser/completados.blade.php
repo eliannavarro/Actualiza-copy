@@ -48,6 +48,27 @@
             background-color: #d11919;
         }
     </style>
+    <style>
+/* Desplazamiento horizontal */
+@media (max-width: 900px) {
+    .container {
+        overflow-x: auto; /* Permite deslizar horizontalmente */
+    }
+
+    table {
+        min-width: 700px; /* Evita que se comprima demasiado */
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        border: none !important; /* Quita bordes externos */
+    }
+
+    th, td {
+        border: none !important; /* Quita bordes internos */
+    }
+}
+    </style>
+
 @endsection
 
 @section('content')

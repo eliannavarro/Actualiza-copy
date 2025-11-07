@@ -19,6 +19,7 @@
 
     @yield('style')
 </head>
+
 <body>
     <nav class="sidebar close">
         <header>
@@ -35,9 +36,17 @@
             <div class="menu">
                 <ul class="menu-links">
 
+                    {{-- 🔹 Órdenes --}}
+                    <li class="nav-link">
+                        <a href="{{ route('asignados.index') }}">
+                             <i class='bx bx-briefcase icon'></i>
+                             <span class="text nav-text">Órdenes</span>
+                        </a>
+                    </li>
+                    
                     {{-- 🔹 Pendientes (vista principal) --}}
                     <li class="nav-link">
-                        <a href="{{ route('datauser.asignados') }}">
+                        <a href="{{ route('datauser.pendientes') }}">
                             <i class='bx bx-list-ul icon'></i>
                             <span class="text nav-text">Pendientes</span>
                         </a>
