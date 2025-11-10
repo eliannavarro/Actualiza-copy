@@ -5,6 +5,8 @@
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/Datas/indexDataUser.css') }}">
+   
+
     <style>
         table {
             width: 100%;

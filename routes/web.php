@@ -83,6 +83,8 @@ Route::middleware(['auth', CheckRole::class . ':user'])->group(function () {
     // odenes (usuarios normales)
     // Completados (usuarios normales)
     Route::get('/datauser/completados', [DataUserController::class, 'completados'])->name('datauser.completados');
+    Route::get('/datauser/verCompletados', [DataUserController::class, 'verCompletados'])->name('datauser.verCompletados');
+
     // pendientes (usuarios normales)
     Route::get('/datauser/pendientes', [DataUserController::class, 'asignadospendientes'])->name('datauser.pendientes');
     

@@ -13,60 +13,38 @@
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
-
     <div class="header-container">
-        <h2>Órdenes</h2>
-    </div>
+    <h2>Órdenes Pendientes</h2>
 
-    {{-- 🔍 Buscador --}}
-    <div style="display: flex; justify-content: flex-end; margin-bottom: 15px;">
-        <form method="GET" action="{{ route('datauser.asignados') }}" style="display: flex; align-items: center; gap: 8px;">
-            <input
-                type="text"
-                name="search"
-                value="{{ request('search') }}"
-                placeholder="Buscar cliente o ciclo..."
-                style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; width: 220px;"
-            >
+{{-- 🔍 Buscador + Ver Pendientes --}}
+<div style="display: flex; justify-content: flex-end; margin-bottom: 15px; gap: 8px; flex-wrap: wrap;">
 
-            <button
-                type="submit"
-                style="
-                    display: flex;
-                    align-items: center;
-                    gap: 6px;
-                    padding: 8px 14px;
-                    background-color: white;
-                    border: 1px solid #ccc;
-                    border-radius: 6px;
-                    color: #333;
-                    font-weight: 500;
-                    cursor: pointer;
-                    transition: all 0.15s ease;
-                "
-                onmouseover="this.style.backgroundColor='#f0f0f0'"
-                onmouseout="this.style.backgroundColor='white'">
-                <i class="bx bx-search" style="font-size:18px"></i>
-                Buscar
-            </button>
-        </form>
-    </div>
-<style>
 
-/* Responsive */
-@media (max-width: 600px) {
-    form[action="{{ route('datauser.asignados') }}"] {
-        justify-content: center !important;
-    }
-    form[action="{{ route('datauser.asignados') }}"] input {
-        width: 100% !important;
-    }
-    form[action="{{ route('datauser.asignados') }}"] button {
-        width: 100% !important;
-        justify-content: center;
-    }
-}
-</style>
+    {{-- 🔄 Botón para ir a completados --}}
+    <a
+        href="{{ route('datauser.verCompletados') }}"
+        style="
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            color: #ca1717;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        "
+        onmouseover="this.style.backgroundColor='#f0f0f0'"
+        onmouseout="this.style.backgroundColor='#fff'">
+        <i class='bx bx-list-check' style="font-size:18px"></i>
+        Ver Completados
+    </a>
+</div>
+
+    
     {{-- 🧾 Tabla de datos --}}
     @if ($data->isEmpty())
         <p class="message">No hay órdenes asignadas para mostrar.</p>

@@ -72,6 +72,7 @@ public function index(Request $request)
     $search = $request->input('search');
 
     $data = Data::where('id_user', $userId)
+                ->where('estado','Pendiente') // ✅ Solo pendientes (ajusta según tu modelo)
                 ->when($search, function($query, $search) {
                     $query->where(function($q) use ($search) {
                         $q->where('nombres', 'like', "%{$search}%")
@@ -85,5 +86,27 @@ public function index(Request $request)
 
     return view('Data.DataUser.index', compact('data', 'search'));
 }
+
+public function verCompletados(Request $request)
+{
+    $userId = Auth::id();
+    $search = $request->input('search');
+
+    $data = Data::where('id_user', $userId)
+                ->where('estado', '1') // ✅ Solo completadas
+                ->when($search, function($query, $search) {
+                    $query->where(function($q) use ($search) {
+                        $q->where('nombres', 'like', "%{$search}%")
+                          ->orWhere('ciclo', 'like', "%{$search}%")
+                          ->orWhere('direccion', 'like', "%{$search}%");
+                    });
+                })
+                ->orderBy('created_at', 'desc')
+                ->paginate(10)
+                ->appends($request->only('search'));
+
+    return view('Data.DataUser.verCompletados', compact('data', 'search'));
+}
+
 
 }
