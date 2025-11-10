@@ -99,6 +99,16 @@
                     @enderror
                 </div>
 
+                {{-- Medidor --}}
+                <div class="mb-3">
+                    <label for="medidor" class="form-label">Medidor</label>
+                    <input type="text" class="form-control" id="medidor" name="medidor"
+                        value="{{ $data->medidor ?? old('medidor') }}" placeholder="">
+                    @error('medidor')
+                        <div class="alert alert-danger mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+
                 {{-- Ajustar el botón de registrar para que no se vea pegado --}}
                 <br>
                 {{-- Botón de envío --}}

@@ -17,6 +17,7 @@ class Data extends Model
         'obs_adic',
         'ciclo',
         'nombre_auditor',
+        'medidor',
         
         'lector',
         'auditor',

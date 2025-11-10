@@ -20,6 +20,8 @@ return new class extends Migration {
             $table->string('causanl_obs')->nullable();
             $table->string('ciclo')->nullable();
             $table->string('obs_adic')->nullable();
+            $table->string('medidor')->nullable();
+
 
             $table->string('lector')->nullable();
             $table->string('atendio_usuario')->nullable();

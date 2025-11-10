@@ -77,7 +77,7 @@ class DataController extends Controller
         $direction = $request->get('direction', 'asc');
 
         // Validar que la columna y la dirección sean válidas
-        $validColumns = ['nombres', 'cuentaContrato', 'direccion', 'causanl_obs', 'obs_adic', 'ciclo', 'nombre_auditor'];
+        $validColumns = ['nombres', 'cuentaContrato', 'direccion', 'causanl_obs', 'obs_adic', 'ciclo', 'nombre_auditor','medidor'];
         if (!in_array($sortBy, $validColumns)) {
             $sortBy = 'id';
         }
@@ -113,7 +113,7 @@ class DataController extends Controller
         $direction = $request->get('direction', 'asc'); // Dirección de orden por defecto
 
         // Validar la columna y la dirección de ordenamiento
-        $validColumns = ['nombres', 'cuentaContrato', 'direccion', 'causanl_obs', 'obs_adic', 'ciclo', 'nombre_auditor'];
+        $validColumns = ['nombres', 'cuentaContrato', 'direccion', 'causanl_obs', 'obs_adic', 'ciclo', 'nombre_auditor', 'medidor'];
         if (!in_array($sortBy, $validColumns)) {
             $sortBy = 'id';
         }
@@ -152,6 +152,9 @@ class DataController extends Controller
         if ($request->filled('buscador-nombre_auditor')) {
             $query->where('nombre_auditor', 'like', '%' . $request->input('buscador-nombre_auditor') . '%');
         }
+        if ($request->filled('buscador-medidor')) {
+            $query->where('medidor', 'like', '%' . $request->input('buscador-medidor') . '%');
+        }
 
         // Aplicar el ordenamiento
         $data = $query
@@ -188,7 +191,7 @@ class DataController extends Controller
         $direction = $request->get('direction', 'asc'); // Dirección por defecto
 
         // Validar que la columna y la dirección sean válidas
-        $validColumns = ['operario', 'nombres', 'cuentaContrato', 'direccion', 'causanl_obs', 'obs_adic', 'ciclo', 'nombre_auditor'];
+        $validColumns = ['operario', 'nombres', 'cuentaContrato', 'direccion', 'causanl_obs', 'obs_adic', 'ciclo', 'nombre_auditor','medidor'];
         if (!in_array($sortBy, $validColumns)) {
             $sortBy = 'id';
         }
@@ -224,7 +227,7 @@ class DataController extends Controller
         $direction = $request->get('direction', 'asc'); // Dirección de orden por defecto
 
         // Validar la columna y la dirección de ordenamiento
-        $validColumns = ['operario', 'nombres', 'cuentaContrato', 'direccion', 'causanl_obs', 'obs_adic', 'ciclo', 'nombre_auditor'];
+        $validColumns = ['operario', 'nombres', 'cuentaContrato', 'direccion', 'causanl_obs', 'obs_adic', 'ciclo', 'nombre_auditor', 'medidor'];
         if (!in_array($sortBy, $validColumns)) {
             $sortBy = 'id';
         }
@@ -267,6 +270,10 @@ class DataController extends Controller
 
         if ($request->filled('buscador-nombre_auditor')) {
             $query->where('nombre_auditor', 'like', '%' . $request->input('buscador-nombre_auditor') . '%');
+        }
+
+        if ($request->filled('buscador-medidor')) {
+            $query->where('medidor', 'like', '%' . $request->input('buscador-medidor') . '%');
         }
 
         // Aplicar el ordenamiento
@@ -401,6 +408,7 @@ class DataController extends Controller
             'causanl_obs' => 'required|string|max:250',
             'obs_adic' => 'required|string|max:255',
             'ciclo' => 'required|string|in:105, 114, 119, 123',
+            'medidor' => 'required|string|max:255|regex:/^[^#]+$/',
 
         ], [
             'nombres.required' => 'El nombre es obligatorio.',
@@ -413,6 +421,7 @@ class DataController extends Controller
             'obs_adic.required' => 'El obs_adic es obligatorio.',
             'ciclo.required' => 'La categoría es obligatoria.',
             'ciclo.in' => '105, 114, 119, 123',
+            'medidor' => 'La categoría es obligatoria.',
 
         ]);
         // Crear registro
@@ -468,7 +477,7 @@ class DataController extends Controller
         $direction = $request->get('direction', 'asc'); // Dirección por defecto
 
         // Validar que la columna y la dirección de ordenamiento sean válidas
-        $validColumns = ['operario', 'nombres', 'direccion', 'cuentaContrato', 'causanl_obs', 'obs_adic', 'ciclo', 'nombre_auditor'];
+        $validColumns = ['operario', 'nombres', 'direccion', 'cuentaContrato', 'causanl_obs', 'obs_adic', 'ciclo', 'nombre_auditor','medidor'];
         if (!in_array($sortBy, $validColumns)) {
             $sortBy = 'id';
         }
@@ -525,6 +534,7 @@ class DataController extends Controller
             'causanl_obs' => 'required|string|max:220',
             'obs_adic' => 'required|string|max:220',
             'ciclo' => 'required|string|in:105, 114, 119, 123',
+            'medidor' => 'required|string|max:100',
 
             'atendio_usuario' => 'required|string|in:si,no',
             'lector' => 'required|string',
@@ -542,6 +552,8 @@ class DataController extends Controller
             'causanl_obs' => 'obligatorio',
 
             'obs_adic.required' => 'obligatorio.',
+
+            'medidor' => 'obligatorio.',
 
             'nombre_auditor' => 'El nombre del auditor es obligatorio.',
 

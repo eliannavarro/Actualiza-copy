@@ -172,7 +172,26 @@
                                         class="bx {{ request('direction') == 'asc' ? 'bx-up-arrow-alt' : 'bx-down-arrow-alt' }}"></i>
                                 @endif
                             </a>
-                        </th>      
+                        </th>   
+                        
+                        
+                        <th>
+                            @php
+                                $queryParams = request()->query();
+                                $queryParams['sortBy'] = 'medidor';
+                                $queryParams['direction'] =
+                                    request('sortBy') == 'medidor' && request('direction') == 'asc'
+                                        ? 'desc'
+                                        : 'asc';
+                            @endphp
+                            <a href="{{ route(Route::currentRouteName(), $queryParams) }}">
+                                Numero del medidor
+                                @if (request('sortBy') == 'medidor')
+                                    <i
+                                        class="bx {{ request('direction') == 'asc' ? 'bx-up-arrow-alt' : 'bx-down-arrow-alt' }}"></i>
+                                @endif
+                            </a>
+                        </th>  
 
                         <th>
                             Excel
@@ -197,6 +216,7 @@
                             <td>{{ $data->cuentaContrato }}</td>
                             <td class="table-cell-truncate">{{ $data->direccion }}</td>
                             <td>{{ $data->nombre_auditor }}</td>
+                            <td>{{ $data->medidor }}</td>
                             
 
                             <td><a href="{{ route('ticket.options', $data->id) }}"> <span

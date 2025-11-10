@@ -27,6 +27,8 @@
                     value="{{ request('buscador-ciclo') }}">
                 <input type="text" name="buscador-nombre_auditor" class="filter-input" placeholder=" nombre_auditor..."
                     value="{{ request('buscador-nombre_auditor') }}">
+                <input type="text" name="buscador-medidor" class="filter-input" placeholder=" medidor..."
+                    value="{{ request('buscador-medidor') }}">
                 <button type="submit" class="btn btn-tertiary">
                     <i class='bx bx-filter-alt' style="margin-right: 0.2rem;"></i>
                     <span>Filtrar</span>
@@ -186,9 +188,7 @@
                                     $queryParams = request()->query();
                                     $queryParams['sortBy'] = 'ciclo';
                                     $queryParams['direction'] =
-                                        request('sortBy') == 'ciclo' && request('direction') == 'asc'
-                                            ? 'desc'
-                                            : 'asc';
+                                        request('sortBy') == 'ciclo' && request('direction') == 'asc' ? 'desc' : 'asc';
                                 @endphp
                                 <a href="{{ route(Route::currentRouteName(), $queryParams) }}">
                                     Ciclo
@@ -215,6 +215,24 @@
                                     @endif
                                 </a>
                             </th>
+
+                             <th>
+                                @php
+                                    $queryParams = request()->query();
+                                    $queryParams['sortBy'] = 'medidor';
+                                    $queryParams['direction'] =
+                                        request('sortBy') == 'medidor' && request('direction') == 'asc'
+                                            ? 'desc'
+                                            : 'asc';
+                                @endphp
+                                <a href="{{ route(Route::currentRouteName(), $queryParams) }}">
+                                    Numero del medidor 
+                                    @if (request('sortBy') == 'medidor')
+                                        <i
+                                            class="bx {{ request('direction') == 'asc' ? 'bx-up-arrow-alt' : 'bx-down-arrow-alt' }}"></i>
+                                    @endif
+                                </a>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -235,6 +253,7 @@
                                 <td>{{ $programacion->obs_adic }}</td>
                                 <td>{{ $programacion->ciclo }}</td>
                                 <td>{{ $programacion->nombre_auditor }}</td>
+                                <td>{{ $programacion->medidor }}</td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -69,7 +69,13 @@
 
             <div class="form-group">
                 <label for="correo">Obs_adic:</label>
-                <input type="text" id="correo" name="obs_adic" class="form-control" value="{{ $data->obs_adic }}"
+                <input type="text" id="obs_adic" name="obs_adic" class="form-control" value="{{ $data->obs_adic }}"
+                    disabled>
+            </div>
+
+            <div class="form-group">
+                <label for="correo">Numero de medidor:</label>
+                <input type="text" id="medidor" name="medidor" class="form-control" value="{{ $data->medidor }}"
                     disabled>
             </div>
 

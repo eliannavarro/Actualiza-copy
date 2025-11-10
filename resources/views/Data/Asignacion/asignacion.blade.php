@@ -25,6 +25,8 @@
                     value="{{ request('buscador-ciclo') }}">
                 <input type="text" name="buscador-nombre_auditor" class="filter-input" placeholder=" nombre_auditor.."
                     value="{{ request('buscador-nombre_auditor') }}">
+                <input type="text" name="buscador-medidor" class="filter-input" placeholder=" medidor.."
+                    value="{{ request('buscador-medidor') }}">
 
                 <!-- Campos ocultos para conservar los parámetros de orden -->
                 <input type="hidden" name="sortBy" value="{{ $sortBy }}">
@@ -90,7 +92,7 @@
                                             : 'asc';
                                 @endphp
                                 <a href="{{ route(Route::currentRouteName(), $queryParams) }}">
-                                    Nombres
+                                    Cliente
                                     @if (request('sortBy') == 'nombres')
                                         <i
                                             class="bx {{ request('direction') == 'asc' ? 'bx-up-arrow-alt' : 'bx-down-arrow-alt' }}"></i>
@@ -108,7 +110,7 @@
                                             : 'asc';
                                 @endphp
                                 <a href="{{ route(Route::currentRouteName(), $queryParams) }}">
-                                    cuentaContrato
+                                    Cuenta contrato
                                     @if (request('sortBy') == 'cuentaContrato')
                                         <i
                                             class="bx {{ request('direction') == 'asc' ? 'bx-up-arrow-alt' : 'bx-down-arrow-alt' }}"></i>
@@ -162,13 +164,14 @@
                                             : 'asc';
                                 @endphp
                                 <a href="{{ route(Route::currentRouteName(), $queryParams) }}">
-                                    Teléfono
+                                    Obs_adic
                                     @if (request('sortBy') == 'obs_adic')
                                         <i
                                             class="bx {{ request('direction') == 'asc' ? 'bx-up-arrow-alt' : 'bx-down-arrow-alt' }}"></i>
                                     @endif
                                 </a>
                             </th>
+
                             <th>
                                 @php
                                     $queryParams = request()->query();
@@ -203,6 +206,24 @@
                             </th>
 
                             <th>
+                                @php
+                                    $queryParams = request()->query();
+                                    $queryParams['sortBy'] = 'medidor';
+                                    $queryParams['direction'] =
+                                        request('sortBy') == 'medidor' && request('direction') == 'asc'
+                                            ? 'desc'
+                                            : 'asc';
+                                @endphp
+                                <a href="{{ route(Route::currentRouteName(), $queryParams) }}">
+                                    Medidor
+                                    @if (request('sortBy') == 'medidor')
+                                        <i
+                                            class="bx {{ request('direction') == 'asc' ? 'bx-up-arrow-alt' : 'bx-down-arrow-alt' }}"></i>
+                                    @endif
+                                </a>
+                            </th>
+
+                            <th>
                                 Acciones
                             </th>
                         </tr>
@@ -217,19 +238,21 @@
                                     </label>
                                 </td>
                                 <td class="table-cell-truncate">{{ $programacion->nombres }}</td>
-                                <td class="table-cell-truncate">{{ $programacion->direccion }}</td>
                                 <td>{{ $programacion->cuentaContrato }}</td>
+                                <td class="table-cell-truncate">{{ $programacion->direccion }}</td>
                                 <td>{{ $programacion->causanl_obs }}</td>
                                 <td>{{ $programacion->obs_adic }}</td>
-                                 <td>{{ $programacion->ciclo }}</td>
-                                  <td>{{ $programacion->nombre_auditor }}</td>
+                                <td>{{ $programacion->ciclo }}</td>
+                                <td>{{ $programacion->nombre_auditor }}</td>
+                                <td>{{ $programacion->medidor }}</td>
 
                                 <td>
                                     <div class="action-buttons">
                                         {{-- <a href="{{ route('remision.generate', $programacion->id) }}" target="_blank"><i
                                                 class='bx bxs-star' style="font-size:25px; color: #ad0000;"></i></a> --}}
 
-                                        <a href="#" onclick="eliminarVisita({{ $programacion->id }}); return false;"
+                                        <a href="#"
+                                            onclick="eliminarVisita({{ $programacion->id }}); return false;"
                                             title="Eliminar visita">
                                             <i class='bx bx-trash' style="font-size:25px; color:red; cursor:pointer;"></i>
                                         </a>

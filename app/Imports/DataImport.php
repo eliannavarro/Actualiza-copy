@@ -18,27 +18,20 @@ class DataImport implements ToCollection
             if ($index === 0) continue;
             // Mapear los datos de Excel a las columnas de la base de datos
             $data = [
-                'orden' => $row[0] ?? null,
+               
                 'nombres' => $row[1] ?? null,
                 'cuentaContrato' => $row[2] ?? null,
                 'direccion' => $row[3] ?? null,
                 'causanl_obs' => $row[4] ?? null,
                 'obs_adic' => $row[5] ?? null,
-                'nombre_auditor' => $row[6] ?? null,
-                'ciclo' => $row[12] ?? null,
-
-
-                'lector' => null,
-                'atendio_usuario' => null,
-                'auditor' => null,
-                'observacion_inspeccion' => null,
-                'url_foto' => null,
-                'id_user' => null,
-                'estado' => null,
+                'medidor' => $row[8] ?? null,
+                'ciclo' => $row[6] ?? null,
+                'nombre_auditor' => $row[7] ?? null,
+                
             ];
 
             // Verificar si el registro ya existe en la base de datos por 'contrato'
-            $existingRecord = Data::where('orden', $data['orden'])->first();
+            $existingRecord = Data::where('cuentaContrato', $data['cuentaContrato'])->first();
 
             if (!$existingRecord) {
                 // Insertar nuevo registro si no existe

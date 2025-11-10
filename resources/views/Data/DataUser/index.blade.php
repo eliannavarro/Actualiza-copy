@@ -79,6 +79,7 @@
                     <tr><td colspan="5"><strong>Cliente:</strong> {{ $item->nombres ?? '---' }}</td></tr>
                     <tr><td colspan="5"><strong>Nombre auditor:</strong> {{ $item->nombre_auditor ?? '---' }}</td></tr>
                     <tr><td colspan="5"><strong>Dirección:</strong> {{ $item->direccion ?? '---' }}</td></tr>
+                    <tr><td colspan="5"><strong>Numero medidor:</strong> {{ $item->medidor ?? '---' }}</td></tr>
                     <tr>
                         <td colspan="5">
                             <strong>Estado:</strong>

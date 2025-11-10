@@ -89,6 +89,7 @@
                     <th>Cuenta contrato</th>
                     <th>Dirección</th>
                     <th>Nombre auditor</th>
+                    <th>Numero medidor</th>
                     <th>Fecha entrega</th>
                     <th>Estado</th>
                 </tr>
@@ -102,6 +103,7 @@
                         <td>{{ $item->cuentaContrato ?? '---' }}</td>
                         <td>{{ $item->direccion ?? '---' }}</td>
                         <td>{{ $item->nombre_auditor ?? '---' }}</td>
+                        <td>{{ $item->medidor ?? '---' }}</td>
 
                         {{-- Mostrar la fecha entrega formateada --}}
                         <td>

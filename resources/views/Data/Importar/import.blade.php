@@ -36,15 +36,13 @@
                     <button type="button" class="btn btn-secondary"
                         onclick="confirmAction('Agregar', '{{ route('import.add') }}')">
                         Agregar</button>
-                    <a href="{{ route('home') }}" class="btn btn-tertiary">
-                        Volver
-                    </a>
+
                 </div>
             </form>
         </div>
         <div class="info-container">
             <p class="info-primary">
-                <strong>Reemplazar:</strong> Sustituye los registros existentes con los nuevos datos del archivo Excel.
+                <strong>Reemplazar:</strong> Sustituye los registros existentes con los nuevos datos del archivo Excel, si tienes registros en asignar se eliminaran si no estan en el Excel.
             </p>
             <p class="info-success">
                 <strong>Agregar:</strong> Añade nuevos registros al sistema basados en el archivo Excel sin afectar los existentes.
