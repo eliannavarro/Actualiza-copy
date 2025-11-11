@@ -85,22 +85,6 @@
                             <th>
                                 @php
                                     $queryParams = request()->query();
-                                    $queryParams['sortBy'] = 'orden';
-                                    $queryParams['direction'] =
-                                        request('sortBy') == 'orden' && request('direction') == 'asc' ? 'desc' : 'asc';
-                                @endphp
-                                <a href="{{ route(Route::currentRouteName(), $queryParams) }}">
-                                    Orden
-                                    @if (request('sortBy') == 'orden')
-                                        <i
-                                            class="bx {{ request('direction') == 'asc' ? 'bx-up-arrow-alt' : 'bx-down-arrow-alt' }}"></i>
-                                    @endif
-                                </a>
-                            </th>
-
-                            <th>
-                                @php
-                                    $queryParams = request()->query();
                                     $queryParams['sortBy'] = 'ciclo';
                                     $queryParams['direction'] =
                                         request('sortBy') == 'ciclo' && request('direction') == 'asc' ? 'desc' : 'asc';
@@ -232,7 +216,7 @@
                                             : 'asc';
                                 @endphp
                                 <a href="{{ route(Route::currentRouteName(), $queryParams) }}">
-                                    Numero medidor
+                                Numero medidor
                                     @if (request('sortBy') == 'medidor')
                                         <i
                                             class="bx {{ request('direction') == 'asc' ? 'bx-up-arrow-alt' : 'bx-down-arrow-alt' }}"></i>
@@ -241,7 +225,7 @@
                             </th>
 
                             <th>
-                                Acciones
+                                Eliminar
                             </th>
                         </tr>
                     </thead>
@@ -254,13 +238,12 @@
                                         <span class="checkmark"></span>
                                     </label>
                                 </td>
-                                <td>{{ $programacion->orden }}</td>
+                                <td>{{ $programacion->ciclo }}</td>
                                 <td class="table-cell-truncate">{{ $programacion->nombres }}</td>
                                 <td>{{ $programacion->cuentaContrato }}</td>
                                 <td class="table-cell-truncate">{{ $programacion->direccion }}</td>
                                 <td>{{ $programacion->causanl_obs }}</td>
                                 <td>{{ $programacion->obs_adic }}</td>
-                                <td>{{ $programacion->ciclo }}</td>
                                 <td>{{ $programacion->nombre_auditor }}</td>
                                 <td>{{ $programacion->medidor }}</td>
 
@@ -344,6 +327,10 @@
                 </div>
             </div>
         </form>
+
+
+
+
 
         <div class="pagination-container">
             {{-- @if ($data->hasPages()) --}}
