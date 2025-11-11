@@ -19,13 +19,14 @@ class DataImport implements ToCollection
             // Mapear los datos de Excel a las columnas de la base de datos
             $data = [
                
+                'ciclo' => $row[6] ?? null,
                 'nombres' => $row[1] ?? null,
                 'cuentaContrato' => $row[2] ?? null,
                 'direccion' => $row[3] ?? null,
                 'causanl_obs' => $row[4] ?? null,
                 'obs_adic' => $row[5] ?? null,
                 'medidor' => $row[8] ?? null,
-                'ciclo' => $row[6] ?? null,
+                
                 'nombre_auditor' => $row[7] ?? null,
                 
             ];
